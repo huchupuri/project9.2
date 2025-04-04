@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.ApplicationServices;
 using static EventManagementApp.MainForm;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
