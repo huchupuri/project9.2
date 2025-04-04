@@ -33,9 +33,10 @@ namespace EventManagementApp
                 Description = "Описание события",
                 Participants = new List<string> { "Участник 1", "Участник 2" }
             };
-            _mainForm.RefreshListBox();
+            
             newFormContext.Events.Add(newEvent);
             newFormContext.SaveChanges();
+            _mainForm.RefreshListBox();
         }
     }
 }

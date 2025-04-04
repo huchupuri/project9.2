@@ -37,16 +37,15 @@ namespace EventManagementApp
             btnDelete = new Button();
             txtParticipants = new TextBox();
             txtDescription = new TextBox();
-            tableLayoutPanel = new TableLayoutPanel();
-            txtDate = new TextBox();
-            txtLocation = new TextBox();
             txtTitle = new TextBox();
+            btnSort = new Button();
+            textBox1 = new TextBox();
+            textBox2 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer).BeginInit();
             splitContainer.Panel1.SuspendLayout();
             splitContainer.Panel2.SuspendLayout();
             splitContainer.SuspendLayout();
             panelLeftSide.SuspendLayout();
-            tableLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer
@@ -63,11 +62,12 @@ namespace EventManagementApp
             // splitContainer.Panel2
             // 
             splitContainer.Panel2.BackColor = Color.FromArgb(168, 208, 211);
+            splitContainer.Panel2.Controls.Add(textBox2);
+            splitContainer.Panel2.Controls.Add(textBox1);
             splitContainer.Panel2.Controls.Add(btnEdit);
             splitContainer.Panel2.Controls.Add(btnDelete);
             splitContainer.Panel2.Controls.Add(txtParticipants);
             splitContainer.Panel2.Controls.Add(txtDescription);
-            splitContainer.Panel2.Controls.Add(tableLayoutPanel);
             splitContainer.Panel2.Controls.Add(txtTitle);
             splitContainer.Panel2.Padding = new Padding(10);
             splitContainer.Size = new Size(983, 586);
@@ -76,6 +76,7 @@ namespace EventManagementApp
             // 
             // panelLeftSide
             // 
+            panelLeftSide.Controls.Add(btnSort);
             panelLeftSide.Controls.Add(listBoxEvents);
             panelLeftSide.Controls.Add(btnReports);
             panelLeftSide.Controls.Add(btnAddEvent);
@@ -174,52 +175,12 @@ namespace EventManagementApp
             txtDescription.BorderStyle = BorderStyle.None;
             txtDescription.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtDescription.ForeColor = Color.White;
-            txtDescription.Location = new Point(10, 110);
+            txtDescription.Location = new Point(10, 95);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(626, 300);
+            txtDescription.Size = new Size(626, 315);
             txtDescription.TabIndex = 2;
             txtDescription.Text = "ОПИСАНИЕ";
-            // 
-            // tableLayoutPanel
-            // 
-            tableLayoutPanel.ColumnCount = 2;
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel.Controls.Add(txtDate, 0, 0);
-            tableLayoutPanel.Controls.Add(txtLocation, 1, 0);
-            tableLayoutPanel.Location = new Point(10, 60);
-            tableLayoutPanel.Name = "tableLayoutPanel";
-            tableLayoutPanel.RowCount = 1;
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel.Size = new Size(626, 40);
-            tableLayoutPanel.TabIndex = 1;
-            // 
-            // txtDate
-            // 
-            txtDate.BackColor = Color.FromArgb(194, 184, 163);
-            txtDate.BorderStyle = BorderStyle.None;
-            txtDate.Dock = DockStyle.Fill;
-            txtDate.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDate.ForeColor = Color.White;
-            txtDate.Location = new Point(3, 3);
-            txtDate.Name = "txtDate";
-            txtDate.Size = new Size(307, 27);
-            txtDate.TabIndex = 0;
-            txtDate.Text = "ДАТА";
-            // 
-            // txtLocation
-            // 
-            txtLocation.BackColor = Color.FromArgb(194, 184, 163);
-            txtLocation.BorderStyle = BorderStyle.None;
-            txtLocation.Dock = DockStyle.Fill;
-            txtLocation.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtLocation.ForeColor = Color.White;
-            txtLocation.Location = new Point(316, 3);
-            txtLocation.Name = "txtLocation";
-            txtLocation.Size = new Size(307, 27);
-            txtLocation.TabIndex = 1;
-            txtLocation.Text = "МЕСТО";
             // 
             // txtTitle
             // 
@@ -232,6 +193,37 @@ namespace EventManagementApp
             txtTitle.Size = new Size(626, 32);
             txtTitle.TabIndex = 0;
             txtTitle.Text = "ЗАГОЛОВОК";
+            // 
+            // btnSort
+            // 
+            btnSort.BackColor = Color.FromArgb(140, 126, 117);
+            btnSort.FlatStyle = FlatStyle.Flat;
+            btnSort.ForeColor = Color.White;
+            btnSort.Location = new Point(166, 55);
+            btnSort.Name = "btnSort";
+            btnSort.Size = new Size(174, 30);
+            btnSort.TabIndex = 3;
+            btnSort.Text = "СОРТИРОВКА";
+            btnSort.TextAlign = ContentAlignment.MiddleLeft;
+            btnSort.UseVisualStyleBackColor = false;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(444, 538);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(125, 27);
+            textBox1.TabIndex = 6;
+            // 
+            // textBox2
+            // 
+            textBox2.BackColor = Color.FromArgb(140, 126, 117);
+            textBox2.Location = new Point(10, 55);
+            textBox2.Multiline = true;
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(240, 30);
+            textBox2.TabIndex = 7;
+            textBox2.Text = " ";
+            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // MainForm
             // 
@@ -249,8 +241,6 @@ namespace EventManagementApp
             ((System.ComponentModel.ISupportInitialize)splitContainer).EndInit();
             splitContainer.ResumeLayout(false);
             panelLeftSide.ResumeLayout(false);
-            tableLayoutPanel.ResumeLayout(false);
-            tableLayoutPanel.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -262,13 +252,13 @@ namespace EventManagementApp
         private Button btnReports;
         private ListBox listBoxEvents;
         private TextBox txtTitle;
-        private TableLayoutPanel tableLayoutPanel;
-        private TextBox txtDate;
-        private TextBox txtLocation;
         private TextBox txtDescription;
         private TextBox txtParticipants;
         private Button btnDelete;
         private Button btnEdit;
         private DataGridView dataGridView1;
+        private Button btnSort;
+        private TextBox textBox2;
+        private TextBox textBox1;
     }
 }

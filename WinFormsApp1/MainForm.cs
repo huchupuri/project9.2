@@ -22,7 +22,7 @@ namespace EventManagementApp
             InitializeComponent();
             _context = new ApplicationDbContext();
             PopulateEventList();
-            
+
         }
         private void LoadData()
         {
@@ -37,7 +37,7 @@ namespace EventManagementApp
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка: {ex.Message}");
-            }   
+            }
         }
         public class ApplicationDbContext : DbContext
         {
@@ -60,7 +60,7 @@ namespace EventManagementApp
         }
 
         private void PopulateEventList()
-        {   
+        {
             try
             {
                 var events = _context.Events.ToList();
@@ -102,8 +102,8 @@ namespace EventManagementApp
                 if (selectedItem is Event selectedEvent)
                 {
                     txtTitle.Text = selectedEvent.Title;
-                    txtDate.Text = selectedEvent.Date.ToString("dd.MM.yyyy"); // Форматируем дату
-                    txtLocation.Text = selectedEvent.Place;
+                    textBox2.Text = selectedEvent.Date.ToString("dd.MM.yyyy"); 
+                    
                     txtDescription.Text = selectedEvent.Description;
                     txtParticipants.Text = string.Join(", ", selectedEvent.Participants); // Объединяем участников в строку
                 }
@@ -111,7 +111,7 @@ namespace EventManagementApp
         }
         public void RefreshListBox()
         {
-            listBoxEvents.Items.Clear(); 
+            listBoxEvents.Items.Clear();
 
             // Загружаем данные из базы
             var events = _context.Events.ToList();
@@ -137,6 +137,11 @@ namespace EventManagementApp
         }
 
         private void txtParticipants_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }
