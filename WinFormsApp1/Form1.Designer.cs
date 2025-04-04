@@ -35,13 +35,16 @@ namespace EventManagementApp
             // 
             txtTitle.BackColor = Color.FromArgb(216, 199, 184);
             txtTitle.BorderStyle = BorderStyle.None;
-            txtTitle.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtTitle.Font = new Font("Segoe UI", 12F);
             txtTitle.ForeColor = Color.White;
             txtTitle.Location = new Point(20, 20);
+            txtTitle.Multiline = true;
             txtTitle.Name = "txtTitle";
-            txtTitle.Size = new Size(760, 36);
+            txtTitle.Size = new Size(760, 54);
             txtTitle.TabIndex = 0;
             txtTitle.Text = "ЗАГОЛОВОК";
+            txtTitle.Enter += txtTitle_Enter;
+            txtTitle.Leave += txtTitle_Leave;
             // 
             // tableLayoutPanel
             // 
@@ -73,19 +76,22 @@ namespace EventManagementApp
             // 
             // txtLocation
             // 
-            txtLocation.BackColor = Color.FromArgb(171, 176, 135);
+            txtLocation.BackColor = Color.FromArgb(140, 126, 117);
             txtLocation.BorderStyle = BorderStyle.None;
             txtLocation.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtLocation.ForeColor = Color.White;
             txtLocation.Location = new Point(383, 3);
+            txtLocation.Multiline = true;
             txtLocation.Name = "txtLocation";
-            txtLocation.Size = new Size(374, 27);
+            txtLocation.Size = new Size(374, 34);
             txtLocation.TabIndex = 2;
             txtLocation.Text = "МЕСТО";
+            txtLocation.Enter += txtLocation_Enter;
+            txtLocation.Leave += txtLocation_Leave;
             // 
             // txtDescription
             // 
-            txtDescription.BackColor = Color.FromArgb(171, 176, 135);
+            txtDescription.BackColor = Color.FromArgb(194, 184, 163);
             txtDescription.BorderStyle = BorderStyle.None;
             txtDescription.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtDescription.ForeColor = Color.White;
@@ -95,10 +101,12 @@ namespace EventManagementApp
             txtDescription.Size = new Size(760, 300);
             txtDescription.TabIndex = 3;
             txtDescription.Text = "ОПИСАНИЕ";
+            txtDescription.Enter += txtDescription_Enter;
+            txtDescription.Leave += txtDescription_Leave;
             // 
             // txtParticipants
             // 
-            txtParticipants.BackColor = Color.FromArgb(171, 176, 135);
+            txtParticipants.BackColor = Color.FromArgb(194, 184, 163);
             txtParticipants.BorderStyle = BorderStyle.None;
             txtParticipants.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtParticipants.ForeColor = Color.White;
@@ -126,7 +134,7 @@ namespace EventManagementApp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(168, 208, 211);
+            BackColor = Color.Linen;
             ClientSize = new Size(800, 500);
             Controls.Add(btnSave);
             Controls.Add(txtParticipants);

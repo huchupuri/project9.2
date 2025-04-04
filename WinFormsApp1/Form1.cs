@@ -27,15 +27,65 @@ namespace EventManagementApp
             }
             var newEvent = new Event
             {
-                Title = txtTitle.Text,
-                Date = date,
-                Place = "asd",
-                Description = "Описание события",
-                Participants = new List<string> { "Участник 1", "Участник 2" }
+                title = txtTitle.Text,
+                date = date,
+                place = "asd",
+                description = "Описание события",
+                participants = "asd"
             };
-            _mainForm.RefreshListBox();
+
             newFormContext.Events.Add(newEvent);
             newFormContext.SaveChanges();
+            this.Close();
+            _mainForm.RefreshListBox();
+        }
+
+        private void txtTitle_Enter(object sender, EventArgs e)
+        {
+            if (txtTitle.Text == "ЗАГОЛОВОК")
+            {
+                txtTitle.Text = string.Empty;
+            }
+        }
+
+        private void txtTitle_Leave(object sender, EventArgs e)
+        {
+            if (txtTitle.Text == "")
+            {
+                txtTitle.Text = "ЗАГОЛОВОК";
+            }
+        }
+
+        private void txtLocation_Enter(object sender, EventArgs e)
+        {
+            if (txtTitle.Text == "МЕСТО")
+            {
+                txtTitle.Text = string.Empty;
+            }
+        }
+
+        private void txtLocation_Leave(object sender, EventArgs e)
+        {
+            if (txtTitle.Text == "")
+            {
+                txtTitle.Text = "МЕСТО";
+            }
+        }
+
+        private void txtDescription_Enter(object sender, EventArgs e)
+        {
+            if (txtTitle.Text == "ОПИСАНИЕ")
+            {
+                txtTitle.Text = string.Empty;
+            }
+        }
+
+        private void txtDescription_Leave(object sender, EventArgs e)
+        {
+            if (txtTitle.Text == "")
+            {
+                txtTitle.Text = "ОПИСАНИЕ";
+            }
         }
     }
 }

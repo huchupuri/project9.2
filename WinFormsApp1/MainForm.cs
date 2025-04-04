@@ -10,6 +10,8 @@ using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+//using WinFormsApp1.classes;
 
 namespace EventManagementApp
 {
@@ -21,22 +23,7 @@ namespace EventManagementApp
             InitializeComponent();
             _context = new ApplicationDbContext();
             PopulateEventList();
-            
-        }
-        private void LoadData()
-        {
-            try
-            {
-                // Загрузка данных из базы данных
-                var events = _context.Events.ToList();
 
-                // Привязка данных к DataGridView
-                dataGridView1.DataSource = events;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка: {ex.Message}");
-            }   
         }
         public class ApplicationDbContext : DbContext
         {
@@ -45,7 +32,7 @@ namespace EventManagementApp
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
                 // Получение строки подключения из appsettings.json или App.config
-                var connectionString = "Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=2343;";
+                var connectionString = "Host=localhost;Port=2006;Database=postgres;Username=postgres;Password=351025846;";
                 optionsBuilder.UseNpgsql(connectionString);
             }
 
@@ -54,12 +41,23 @@ namespace EventManagementApp
                 base.OnModelCreating(modelBuilder);
 
                 // Настройка схемы (если необходимо)
-                modelBuilder.Entity<Event>().ToTable("Events", "public");
+                modelBuilder.Entity<Event>().ToTable("events", "public");
             }
         }
+        public class Event
+        {
+            public int id { get; set; }
+            public string title { get; set; }
+            public DateTime date { get; set; }
 
+            public string place { get; set; }
+
+            public string description { get; set; }
+
+            public string participants { get; set; }
+        }
         private void PopulateEventList()
-        {   
+        {
             try
             {
                 var events = _context.Events.ToList();
@@ -100,44 +98,72 @@ namespace EventManagementApp
                 // Если выбран элемент типа Event
                 if (selectedItem is Event selectedEvent)
                 {
-                    txtTitle.Text = selectedEvent.Title;
-                    txtDate.Text = selectedEvent.Date.ToString("dd.MM.yyyy"); // Форматируем дату
-                    txtLocation.Text = selectedEvent.Place;
-                    txtDescription.Text = selectedEvent.Description;
-                    txtParticipants.Text = string.Join(", ", selectedEvent.Participants); // Объединяем участников в строку
+                    textBoxTitle.Text = selectedEvent.title;
+                    txtBoxDate.Text = selectedEvent.date.ToString("dd.MM.yyyy"); // Форматируем дату
+                    txtBoxPlace.Text = selectedEvent.place;
+                    txtDescription.Text = selectedEvent.description;
+                    txtParticipants.Text = string.Join(", ", selectedEvent.participants); // Объединяем участников в строку
                 }
             }
         }
         public void RefreshListBox()
         {
-            listBoxEvents.Items.Clear(); 
-
-            // Загружаем данные из базы
+            listBoxEvents.Items.Clear();
             var events = _context.Events.ToList();
-
-            // Добавляем их в ListBox
             foreach (var eventItem in events)
             {
                 listBoxEvents.Items.Add(eventItem);
             }
         }
-
-        public class Event
-        {
-            public int Id { get; set; }
-            public string Title { get; set; }
-            public DateTime Date { get; set; }
-
-            public string Place { get; set; }
-
-            public string Description { get; set; }
-
-            public List<string> Participants { get; set; } = new List<string>();
-        }
-
         private void txtParticipants_TextChanged(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtParticipants.Text))
+            {
+                txtParticipants.Text = "УЧАСТНИКИ";
+            }
+        }
 
+        private void panelLeftSide_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnAddEvent_Click_1(object sender, EventArgs e)
+        {
+            EventDetailsForm newForm = new EventDetailsForm(this);
+            newForm.Show();
+        }
+
+        private void textBoxTitle_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxTitle.Text))
+            {
+                textBoxTitle.Text = "ЗАГОЛОВОК";
+            }
+        }
+
+        private void txtBoxDate_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtBoxDate.Text))
+            {
+                txtBoxDate.Text = "ДАТА";
+            }
+        }
+
+        private void txtBoxPlace_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtBoxPlace.Text))
+            {
+                txtBoxPlace.Text = "МЕСТО";
+            }
+        }
+
+        private void txtDescription_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtDescription.Text))
+            {
+                txtDescription.Text = "ОПИСАНИЕ";
+            }
         }
     }
 }
