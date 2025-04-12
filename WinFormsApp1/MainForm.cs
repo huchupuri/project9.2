@@ -47,10 +47,19 @@ namespace EventManagementApp
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var selectedEvent = listBoxEvents.SelectedItem as Event;
-
             EventDelete(selectedEvent);
-
+            RefreshListBox();
+            if (listBoxEvents.Items.Count > 0)
+            {
+                listBoxEvents.SelectedIndex = 0;
+                listBoxEvents_SelectedIndexChanged(listBoxEvents, EventArgs.Empty);
+            }
+            else
+            {
+                
+            }
         }
+
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
@@ -72,10 +81,12 @@ namespace EventManagementApp
                     labelParticipants.Text = string.Join(", ", selectedEvent.participants);
                 }
                 btnEdit.Enabled = true;//кнопка редактирование работает если что тоо выбрано
+                btnEdit.Enabled = true;
             }
             else
             {
                 btnEdit.Enabled = false;//кнопка редактирование не работает если ничего не выбрано
+                //btnDelete.Enabled = false;
             }
         }
         public void RefreshListBox()

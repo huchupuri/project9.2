@@ -13,7 +13,7 @@ namespace EventManagementApp
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = "Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=2343;";
+            var connectionString = "Host=ep-silent-dawn-ab7uegdz-pooler.eu-west-2.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=npg_g6M8QBZaoCJU;SSL Mode=Require";
             optionsBuilder.UseNpgsql(connectionString);
         }
 

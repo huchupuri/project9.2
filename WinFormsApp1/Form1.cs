@@ -46,7 +46,6 @@ namespace EventManagementApp
 
                 var newEvent = new Event
                 {
-
                     title = txtTitle.Text,
                     date = date,
                     place = txtLocation.Text,
@@ -58,12 +57,13 @@ namespace EventManagementApp
             else
             {
                 _mainForm.EventDelete(_event);
-                _event.title = txtTitle.Text;
-                _event.date = date;
-                _event.place = txtLocation.Text;
-                _event.description = txtDescription.Text;
-                _event.participants = txtParticipants.Text;
-                newFormContext.Events.Add(_event);
+                var NewEvent = new Event();
+                NewEvent.title = txtTitle.Text;
+                NewEvent.date = date;
+                NewEvent.place = txtLocation.Text;
+                NewEvent.description = txtDescription.Text;
+                NewEvent.participants = txtParticipants.Text;
+                newFormContext.Events.Add(NewEvent);
             }
 
             newFormContext.SaveChanges();
