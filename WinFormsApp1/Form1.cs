@@ -1,90 +1,84 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore;
-using static EventManagementApp.MainForm;
+﻿
 
 namespace EventManagementApp
 {
+    /// <summary>
+    /// формы экрана добавления
+    /// </summary>
     public partial class EventDetailsForm : Form
     {
         private readonly ApplicationDbContext newFormContext;
         private MainForm _mainForm;
-        public EventDetailsForm(MainForm mainForm)
+        private Event _event;
+        public EventDetailsForm(MainForm mainForm, Event Event1)
         {
             InitializeComponent();
             newFormContext = new ApplicationDbContext();
             _mainForm = mainForm;
+            _event = Event1;
+            if (_event != null)
+            {
+
+                txtTitle.Text = _event.title;
+                txtDescription.Text = _event.description;
+                txtLocation.Text = _event.place;
+                txtParticipants.Text = _event.participants;
+                dtpDate.Value = _event.date;
+            }
+            else
+            {
+                txtTitle.PlaceholderText = "ЗАГОЛОВОК";
+                txtLocation.PlaceholderText = "МЕСТО";
+                txtParticipants.PlaceholderText = "УЧАСТНИКИ";
+                txtDescription.PlaceholderText = "ОПИСАНИЕ";
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             DateTime date = dtpDate.Value;
-
             if (date.Kind == DateTimeKind.Unspecified)
             {
                 date = DateTime.SpecifyKind(date, DateTimeKind.Utc);
             }
-            var newEvent = new Event
+            if (_event == null)
             {
-                title = txtTitle.Text,
-                date = date,
-                place = "asd",
-                description = "Описание события",
-                participants = "asd"
-            };
 
-            newFormContext.Events.Add(newEvent);
+                var newEvent = new Event
+                {
+
+                    title = txtTitle.Text,
+                    date = date,
+                    place = txtLocation.Text,
+                    description = txtDescription.Text,
+                    participants = txtParticipants.Text
+                };
+                newFormContext.Events.Add(newEvent);
+            }
+            else
+            {
+                _mainForm.EventDelete(_event);
+                _event.title = txtTitle.Text;
+                _event.date = date;
+                _event.place = txtLocation.Text;
+                _event.description = txtDescription.Text;
+                _event.participants = txtParticipants.Text;
+                newFormContext.Events.Add(_event);
+            }
+
             newFormContext.SaveChanges();
             this.Close();
+            MessageBox.Show("Все успешно сохранено");
             _mainForm.RefreshListBox();
         }
 
-        private void txtTitle_Enter(object sender, EventArgs e)
+        private void txtTitle_KeyDown(object sender, KeyEventArgs e)
         {
-            if (txtTitle.Text == "ЗАГОЛОВОК")
+            if (e.KeyCode == Keys.Enter)
             {
-                txtTitle.Text = string.Empty;
-            }
-        }
-
-        private void txtTitle_Leave(object sender, EventArgs e)
-        {
-            if (txtTitle.Text == "")
-            {
-                txtTitle.Text = "ЗАГОЛОВОК";
-            }
-        }
-
-        private void txtLocation_Enter(object sender, EventArgs e)
-        {
-            if (txtTitle.Text == "МЕСТО")
-            {
-                txtTitle.Text = string.Empty;
-            }
-        }
-
-        private void txtLocation_Leave(object sender, EventArgs e)
-        {
-            if (txtTitle.Text == "")
-            {
-                txtTitle.Text = "МЕСТО";
-            }
-        }
-
-        private void txtDescription_Enter(object sender, EventArgs e)
-        {
-            if (txtTitle.Text == "ОПИСАНИЕ")
-            {
-                txtTitle.Text = string.Empty;
-            }
-        }
-
-        private void txtDescription_Leave(object sender, EventArgs e)
-        {
-            if (txtTitle.Text == "")
-            {
-                txtTitle.Text = "ОПИСАНИЕ";
+                e.SuppressKeyPress = true;
+                e.Handled = true;
+                MessageBox.Show("Нельзя использовать перенос в заголовке");
             }
         }
     }

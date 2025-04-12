@@ -1,92 +1,61 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Drawing;
-using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.ApplicationServices;
-using static EventManagementApp.MainForm;
-using System.Linq;
-using System.Windows.Forms;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-//using WinFormsApp1.classes;
 
 namespace EventManagementApp
 {
+    /// <summary>
+    /// класс событий 
+    /// </summary>
+
+    /// <summary>
+    /// класс главной формы
+    /// </summary>
     public partial class MainForm : Form
     {
+
+        /// <summary>
+        /// класс работы с БД
+        /// </summary>
         private readonly ApplicationDbContext _context;
         public MainForm()
         {
             InitializeComponent();
+            //this.BackgroundImageLayout = ImageLayout.Stretch;
             _context = new ApplicationDbContext();
-            PopulateEventList();
-
+            PopulateEventList();   
+            
+            buttonSort.Click += buttonSort_Click;// Привязка обработчика события для кнопки сортировки
+            listBoxEvents.SelectedIndexChanged += listBoxEvents_SelectedIndexChanged;
+            btnEdit.Enabled = false;//кнопка редактирование не работает
         }
-        public class ApplicationDbContext : DbContext
+        public void EventDelete(Event _event)
         {
-            public DbSet<Event> Events { get; set; }
-
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            if (_event != null)
             {
-                // ��������� ������ ����������� �� appsettings.json ��� App.config
-                var connectionString = "Host=localhost;Port=2006;Database=postgres;Username=postgres;Password=351025846;";
-                optionsBuilder.UseNpgsql(connectionString);
-            }
-
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-            {
-                base.OnModelCreating(modelBuilder);
-
-                // ��������� ����� (���� ����������)
-                modelBuilder.Entity<Event>().ToTable("events", "public");
+                _context.Events.Remove(_event);
+                _context.SaveChanges();
+                RefreshListBox();
             }
         }
-        public class Event
-        {
-            public int id { get; set; }
-            public string title { get; set; }
-            public DateTime date { get; set; }
 
-            public string place { get; set; }
-
-            public string description { get; set; }
-
-            public string participants { get; set; }
-        }
         private void PopulateEventList()
         {
-            try
-            {
-                var events = _context.Events.ToList();
-                foreach (Event e in events) { listBoxEvents.Items.Add(e); }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"������: {ex.Message}");
-            }
-        }
-
-        private void btnAddEvent_Click(object sender, EventArgs e)
-        {
-            EventDetailsForm newForm = new EventDetailsForm(this);
-            newForm.Show();
-        }
-
-        private void btnReports_Click(object sender, EventArgs e)
-        {
+            var events = _context.Events.ToList();
+            foreach (Event e in events) { listBoxEvents.Items.Add(e); }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Delete functionality would be implemented here.");
+            var selectedEvent = listBoxEvents.SelectedItem as Event;
+
+            EventDelete(selectedEvent);
+
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Edit functionality would be implemented here.");
+            EventDetailsForm newForm = new EventDetailsForm(this, listBoxEvents.SelectedItem as Event);
+            newForm.Show();
         }
 
         public void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
@@ -94,16 +63,19 @@ namespace EventManagementApp
             if (listBoxEvents.SelectedIndex != -1)
             {
                 var selectedItem = listBoxEvents.SelectedItem;
-
-                // ���� ������ ������� ���� Event
                 if (selectedItem is Event selectedEvent)
                 {
-                    textBoxTitle.Text = selectedEvent.title;
-                    txtBoxDate.Text = selectedEvent.date.ToString("dd.MM.yyyy"); // ����������� ����
-                    txtBoxPlace.Text = selectedEvent.place;
-                    txtDescription.Text = selectedEvent.description;
-                    txtParticipants.Text = string.Join(", ", selectedEvent.participants); // ���������� ���������� � ������
+                    labelTitle.Text = selectedEvent.title;
+                    labelDate.Text = selectedEvent.date.ToString("dd.MM.yyyy");
+                    labelPlace.Text = selectedEvent.place;
+                    labelDescription.Text = selectedEvent.description;
+                    labelParticipants.Text = string.Join(", ", selectedEvent.participants);
                 }
+                btnEdit.Enabled = true;//кнопка редактирование работает если что тоо выбрано
+            }
+            else
+            {
+                btnEdit.Enabled = false;//кнопка редактирование не работает если ничего не выбрано
             }
         }
         public void RefreshListBox()
@@ -115,55 +87,28 @@ namespace EventManagementApp
                 listBoxEvents.Items.Add(eventItem);
             }
         }
-        private void txtParticipants_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtParticipants.Text))
-            {
-                txtParticipants.Text = "���������";
-            }
-        }
-
-        private void panelLeftSide_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void btnAddEvent_Click_1(object sender, EventArgs e)
         {
-            EventDetailsForm newForm = new EventDetailsForm(this);
+            EventDetailsForm newForm = new EventDetailsForm(this, null);
             newForm.Show();
         }
-
-        private void textBoxTitle_TextChanged(object sender, EventArgs e)
+        private void PopulateEventList(bool sortByDate = false) //сортирует если передается тру , по умолчанию фалс добавляет событие без сортировки 
         {
-            if (string.IsNullOrEmpty(textBoxTitle.Text))
+            var events = sortByDate
+                ? _context.Events.OrderBy(e => e.date).ToList()
+                : _context.Events.ToList();
+
+            listBoxEvents.Items.Clear();//очищает сначала весь листбокс
+            foreach (var eventItem in events)
             {
-                textBoxTitle.Text = "���������";
+                listBoxEvents.Items.Add(eventItem);//добавялет как надо
             }
         }
 
-        private void txtBoxDate_TextChanged(object sender, EventArgs e)
+        private void buttonSort_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtBoxDate.Text))
-            {
-                txtBoxDate.Text = "����";
-            }
-        }
-
-        private void txtBoxPlace_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtBoxPlace.Text))
-            {
-                txtBoxPlace.Text = "�����";
-            }
-        }
-
-        private void txtDescription_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtDescription.Text))
-            {
-                txtDescription.Text = "��������";
-            }
+            PopulateEventList(sortByDate: true);//сортирует
+            MessageBox.Show("Сортировка по дате выполнена");
         }
     }
 }

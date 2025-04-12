@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace WinFormsApp1.Migrations
 {
-    [DbContext(typeof(MainForm.ApplicationDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250402230051_InitialCreate")]
     partial class InitialCreate
     {

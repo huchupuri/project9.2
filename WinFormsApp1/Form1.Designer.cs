@@ -42,9 +42,7 @@ namespace EventManagementApp
             txtTitle.Name = "txtTitle";
             txtTitle.Size = new Size(760, 54);
             txtTitle.TabIndex = 0;
-            txtTitle.Text = "ЗАГОЛОВОК";
-            txtTitle.Enter += txtTitle_Enter;
-            txtTitle.Leave += txtTitle_Leave;
+            txtTitle.KeyDown += txtTitle_KeyDown;
             // 
             // tableLayoutPanel
             // 
@@ -85,9 +83,6 @@ namespace EventManagementApp
             txtLocation.Name = "txtLocation";
             txtLocation.Size = new Size(374, 34);
             txtLocation.TabIndex = 2;
-            txtLocation.Text = "МЕСТО";
-            txtLocation.Enter += txtLocation_Enter;
-            txtLocation.Leave += txtLocation_Leave;
             // 
             // txtDescription
             // 
@@ -100,9 +95,6 @@ namespace EventManagementApp
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new Size(760, 300);
             txtDescription.TabIndex = 3;
-            txtDescription.Text = "ОПИСАНИЕ";
-            txtDescription.Enter += txtDescription_Enter;
-            txtDescription.Leave += txtDescription_Leave;
             // 
             // txtParticipants
             // 
@@ -115,7 +107,6 @@ namespace EventManagementApp
             txtParticipants.Name = "txtParticipants";
             txtParticipants.Size = new Size(640, 40);
             txtParticipants.TabIndex = 4;
-            txtParticipants.Text = "участники";
             // 
             // btnSave
             // 
