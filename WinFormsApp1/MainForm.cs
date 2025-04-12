@@ -23,10 +23,9 @@ namespace EventManagementApp
             //this.BackgroundImageLayout = ImageLayout.Stretch;
             _context = new ApplicationDbContext();
             PopulateEventList();   
-            
-            buttonSort.Click += buttonSort_Click;// Привязка обработчика события для кнопки сортировки
             listBoxEvents.SelectedIndexChanged += listBoxEvents_SelectedIndexChanged;
             btnEdit.Enabled = false;//кнопка редактирование не работает
+            btnDelete.Enabled = false;
         }
         public void EventDelete(Event _event)
         {
@@ -48,15 +47,14 @@ namespace EventManagementApp
         {
             var selectedEvent = listBoxEvents.SelectedItem as Event;
             EventDelete(selectedEvent);
-            RefreshListBox();
-            if (listBoxEvents.Items.Count > 0)
+            if (listBoxEvents.SelectedIndex > 0)
             {
-                listBoxEvents.SelectedIndex = 0;
+                listBoxEvents.SelectedIndex -=1 ;
                 listBoxEvents_SelectedIndexChanged(listBoxEvents, EventArgs.Empty);
             }
             else
             {
-                
+                listBoxEvents_SelectedIndexChanged(listBoxEvents, EventArgs.Empty);
             }
         }
 
@@ -81,12 +79,12 @@ namespace EventManagementApp
                     labelParticipants.Text = string.Join(", ", selectedEvent.participants);
                 }
                 btnEdit.Enabled = true;//кнопка редактирование работает если что тоо выбрано
-                btnEdit.Enabled = true;
+                btnDelete.Enabled = true;
             }
             else
             {
                 btnEdit.Enabled = false;//кнопка редактирование не работает если ничего не выбрано
-                //btnDelete.Enabled = false;
+                btnDelete.Enabled = false;
             }
         }
         public void RefreshListBox()
