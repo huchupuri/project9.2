@@ -26,8 +26,10 @@ namespace EventManagementApp
             dtpDate = new DateTimePicker();
             txtLocation = new TextBox();
             txtDescription = new TextBox();
-            txtParticipants = new TextBox();
             btnSave = new Button();
+            btnRemove = new Button();
+            btnAdd = new Button();
+            listBoxParticipants = new ListBox();
             tableLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -96,24 +98,12 @@ namespace EventManagementApp
             txtDescription.Size = new Size(760, 300);
             txtDescription.TabIndex = 3;
             // 
-            // txtParticipants
-            // 
-            txtParticipants.BackColor = Color.FromArgb(194, 184, 163);
-            txtParticipants.BorderStyle = BorderStyle.None;
-            txtParticipants.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtParticipants.ForeColor = Color.White;
-            txtParticipants.Location = new Point(20, 440);
-            txtParticipants.Multiline = true;
-            txtParticipants.Name = "txtParticipants";
-            txtParticipants.Size = new Size(640, 40);
-            txtParticipants.TabIndex = 4;
-            // 
             // btnSave
             // 
             btnSave.BackColor = Color.FromArgb(140, 102, 102);
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(670, 440);
+            btnSave.Location = new Point(359, 522);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(110, 40);
             btnSave.TabIndex = 5;
@@ -121,14 +111,52 @@ namespace EventManagementApp
             btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
             // 
+            // btnRemove
+            // 
+            btnRemove.BackColor = Color.FromArgb(140, 102, 102);
+            btnRemove.Font = new Font("Segoe UI", 7F);
+            btnRemove.ForeColor = SystemColors.ButtonFace;
+            btnRemove.Location = new Point(417, 446);
+            btnRemove.Name = "btnRemove";
+            btnRemove.Size = new Size(150, 44);
+            btnRemove.TabIndex = 6;
+            btnRemove.Text = "УДАЛИТЬ УЧАСТНИКА";
+            btnRemove.UseVisualStyleBackColor = false;
+            btnRemove.Click += btnRemove_Click;
+            // 
+            // btnAdd
+            // 
+            btnAdd.BackColor = Color.FromArgb(140, 102, 102);
+            btnAdd.Font = new Font("Segoe UI", 7F);
+            btnAdd.ForeColor = SystemColors.ButtonFace;
+            btnAdd.Location = new Point(586, 446);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(189, 44);
+            btnAdd.TabIndex = 7;
+            btnAdd.Text = "ДОБАВИТЬ УЧАСТНИКА";
+            btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // listBoxParticipants
+            // 
+            listBoxParticipants.BackColor = Color.FromArgb(194, 184, 163);
+            listBoxParticipants.FormattingEnabled = true;
+            listBoxParticipants.Location = new Point(20, 446);
+            listBoxParticipants.Name = "listBoxParticipants";
+            listBoxParticipants.Size = new Size(377, 44);
+            listBoxParticipants.TabIndex = 8;
+            listBoxParticipants.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            // 
             // EventDetailsForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Linen;
-            ClientSize = new Size(800, 500);
+            ClientSize = new Size(787, 574);
+            Controls.Add(listBoxParticipants);
+            Controls.Add(btnAdd);
+            Controls.Add(btnRemove);
             Controls.Add(btnSave);
-            Controls.Add(txtParticipants);
             Controls.Add(txtDescription);
             Controls.Add(tableLayoutPanel);
             Controls.Add(txtTitle);
@@ -152,7 +180,9 @@ namespace EventManagementApp
         private DateTimePicker dtpDate;
         private TextBox txtLocation;
         private TextBox txtDescription;
-        private TextBox txtParticipants;
         private Button btnSave;
+        private Button btnRemove;
+        private Button btnAdd;
+        private ListBox listBoxParticipants;
     }
 }

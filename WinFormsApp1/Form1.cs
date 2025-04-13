@@ -1,5 +1,7 @@
 ﻿
 
+using Microsoft.Extensions.Logging;
+
 namespace EventManagementApp
 {
     /// <summary>
@@ -18,22 +20,26 @@ namespace EventManagementApp
             _event = Event1;
             if (_event != null)
             {
-
                 txtTitle.Text = _event.title;
                 txtDescription.Text = _event.description;
                 txtLocation.Text = _event.place;
-                txtParticipants.Text = _event.participants;
+                foreach (var partiItem in _event.participants.Split(", "))
+                {
+                    listBoxParticipants.Items.Add(partiItem);
+                }
                 dtpDate.Value = _event.date;
             }
             else
             {
                 txtTitle.PlaceholderText = "ЗАГОЛОВОК";
                 txtLocation.PlaceholderText = "МЕСТО";
-                txtParticipants.PlaceholderText = "УЧАСТНИКИ";
                 txtDescription.PlaceholderText = "ОПИСАНИЕ";
             }
         }
-
+        public void AddParti(string name, string surname)
+        {
+            listBoxParticipants.Items.Add($"{name} {surname}");
+        }
         private void btnSave_Click(object sender, EventArgs e)
         {
             DateTime date = dtpDate.Value;
@@ -50,7 +56,7 @@ namespace EventManagementApp
                     date = date,
                     place = txtLocation.Text,
                     description = txtDescription.Text,
-                    participants = txtParticipants.Text
+                    participants = string.Join(", ", listBoxParticipants.Items.Cast<string>())
                 };
                 newFormContext.Events.Add(newEvent);
             }
@@ -62,7 +68,7 @@ namespace EventManagementApp
                 NewEvent.date = date;
                 NewEvent.place = txtLocation.Text;
                 NewEvent.description = txtDescription.Text;
-                NewEvent.participants = txtParticipants.Text;
+                NewEvent.participants = string.Join(", ", listBoxParticipants.Items.Cast<string>());
                 newFormContext.Events.Add(NewEvent);
             }
 
@@ -79,6 +85,29 @@ namespace EventManagementApp
                 e.SuppressKeyPress = true;
                 e.Handled = true;
                 MessageBox.Show("Нельзя использовать перенос в заголовке");
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            var newUser = new NewUser(this);
+            newUser.Show();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            if (listBoxParticipants.SelectedIndex != -1)
+            {
+                listBoxParticipants.Items.RemoveAt(listBoxParticipants.SelectedIndex);
+            }
+            else
+            {
+                MessageBox.Show("участник не выбран");
             }
         }
     }
