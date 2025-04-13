@@ -47,21 +47,27 @@ namespace EventManagementApp
         {
             var selectedEvent = listBoxEvents.SelectedItem as Event;
             EventDelete(selectedEvent);
-            if (listBoxEvents.SelectedIndex > 0)
-            {
-                listBoxEvents.SelectedIndex -=1 ;
-                listBoxEvents_SelectedIndexChanged(listBoxEvents, EventArgs.Empty);
-            }
-            else
-            {
-                listBoxEvents_SelectedIndexChanged(listBoxEvents, EventArgs.Empty);
-            }
+
+        // Проверяем, есть ли еще элементы в списке
+        if (listBoxEvents.Items.Count > 0)
+        {
+            // Выбираем первый элемент в списке после удаления
+            listBoxEvents.SelectedIndex = 0;
+
+            // Имитируем нажатие пользователя
+            listBoxEvents_SelectedIndexChanged(listBoxEvents, EventArgs.Empty);
         }
+        else
+        {
+            // Если список пуст, очищаем поля
+        }
+        }   
 
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
             EventDetailsForm newForm = new EventDetailsForm(this, listBoxEvents.SelectedItem as Event);
+            
             newForm.Show();
         }
 
