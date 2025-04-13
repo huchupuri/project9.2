@@ -220,14 +220,19 @@ namespace EventManagementApp
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(983, 586);
             Controls.Add(splitContainer);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            MaximizeBox = false;
+            MaximumSize = new Size(1001, 633);
+            MinimumSize = new Size(1001, 633);
             Name = "MainForm";
+            RightToLeftLayout = true;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Event Management";
+            Load += MainForm_Load;
             splitContainer.Panel1.ResumeLayout(false);
             splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer).EndInit();

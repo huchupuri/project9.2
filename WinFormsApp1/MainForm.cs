@@ -22,7 +22,7 @@ namespace EventManagementApp
             InitializeComponent();
             //this.BackgroundImageLayout = ImageLayout.Stretch;
             _context = new ApplicationDbContext();
-            PopulateEventList();   
+            PopulateEventList();
             listBoxEvents.SelectedIndexChanged += listBoxEvents_SelectedIndexChanged;
             btnEdit.Enabled = false;//кнопка редактирование не работает
             btnDelete.Enabled = false;
@@ -48,26 +48,26 @@ namespace EventManagementApp
             var selectedEvent = listBoxEvents.SelectedItem as Event;
             EventDelete(selectedEvent);
 
-        // Проверяем, есть ли еще элементы в списке
-        if (listBoxEvents.Items.Count > 0)
-        {
-            // Выбираем первый элемент в списке после удаления
-            listBoxEvents.SelectedIndex = 0;
+            // Проверяем, есть ли еще элементы в списке
+            if (listBoxEvents.Items.Count > 0)
+            {
+                // Выбираем первый элемент в списке после удаления
+                listBoxEvents.SelectedIndex = 0;
 
-            // Имитируем нажатие пользователя
-            listBoxEvents_SelectedIndexChanged(listBoxEvents, EventArgs.Empty);
+                // Имитируем нажатие пользователя
+                listBoxEvents_SelectedIndexChanged(listBoxEvents, EventArgs.Empty);
+            }
+            else
+            {
+                // Если список пуст, очищаем поля
+            }
         }
-        else
-        {
-            // Если список пуст, очищаем поля
-        }
-        }   
 
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
             EventDetailsForm newForm = new EventDetailsForm(this, listBoxEvents.SelectedItem as Event);
-            
+
             newForm.Show();
         }
 
@@ -124,6 +124,11 @@ namespace EventManagementApp
         {
             PopulateEventList(sortByDate: true);//сортирует
             MessageBox.Show("Сортировка по дате выполнена");
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
