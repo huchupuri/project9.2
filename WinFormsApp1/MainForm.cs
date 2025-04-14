@@ -1,5 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver.Core.Configuration;
+using OfficeOpenXml;
+using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
+using WinFormsApp1.classes;
+using OfficeOpenXml;
+
 
 namespace EventManagementApp
 {
@@ -12,7 +19,6 @@ namespace EventManagementApp
     /// </summary>
     public partial class MainForm : Form
     {
-
         /// <summary>
         /// класс работы с БД
         /// </summary>
@@ -26,6 +32,7 @@ namespace EventManagementApp
             listBoxEvents.SelectedIndexChanged += listBoxEvents_SelectedIndexChanged;
             btnEdit.Enabled = false;//кнопка редактирование не работает
             btnDelete.Enabled = false;
+            //ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         }
         public void EventDelete(Event _event)
         {
@@ -47,19 +54,20 @@ namespace EventManagementApp
         {
             var selectedEvent = listBoxEvents.SelectedItem as Event;
             EventDelete(selectedEvent);
-
-            // Проверяем, есть ли еще элементы в списке
             if (listBoxEvents.Items.Count > 0)
             {
-                // Выбираем первый элемент в списке после удаления
                 listBoxEvents.SelectedIndex = 0;
-
-                // Имитируем нажатие пользователя
                 listBoxEvents_SelectedIndexChanged(listBoxEvents, EventArgs.Empty);
             }
             else
             {
-                // Если список пуст, очищаем поля
+                labelPlace.Text = "МЕСТО";
+                labelDescription.Text = "ОПИСАНИЕ";
+                labelParticipants.Text = "УЧАСТНИКИ";
+                labelTitle.Text = "ЗАГОЛОВОК";
+                labelDate.Text = "ДАТА";
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
             }
         }
 
@@ -125,10 +133,43 @@ namespace EventManagementApp
             PopulateEventList(sortByDate: true);//сортирует
             MessageBox.Show("Сортировка по дате выполнена");
         }
-
-        private void MainForm_Load(object sender, EventArgs e)
+        private void btnReports_Click(object sender, EventArgs e)
         {
+            using (var excelPackage = new ExcelPackage())
+            {
+                var tablica = excelPackage.Workbook.Worksheets.Add("События");//создание листа в экселе
+                string[] headers = { "Заголовок", "Дата", "Место", "Описание", "Участники" };
 
+                for (int col = 0; col < headers.Length; col++) //делаем шапочку
+                {
+                    tablica.Cells[1, col + 1].Value = headers[col];
+                }
+
+                int rowIn = 2; //вторая строчка начало тк первая это шапочка
+                foreach (var item in listBoxEvents.Items)
+                {
+                    if (item is Event eventItem) 
+                    {
+                        tablica.Cells[rowIn, 1].Value = eventItem.title; 
+                        tablica.Cells[rowIn, 2].Value = eventItem.date.ToString("dd.MM.yyyy"); 
+                        tablica.Cells[rowIn, 3].Value = eventItem.place; 
+                        tablica.Cells[rowIn, 4].Value = eventItem.description;
+                        tablica.Cells[rowIn, 5].Value = eventItem.participants;
+
+                        rowIn++; // Переходим к следующей строке
+                    }
+                }
+                tablica.Cells[tablica.Dimension.Address].AutoFitColumns();
+                using (var saveDialog = new SaveFileDialog())
+                {
+                    saveDialog.FileName = $"Отчет.xlsx";
+
+                    if (saveDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        excelPackage.SaveAs(new FileInfo(saveDialog.FileName));
+                    }
+                }
+            }
         }
     }
 }

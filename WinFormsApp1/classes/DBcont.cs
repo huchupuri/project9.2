@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventManagementApp
+namespace WinFormsApp1.classes
 {
     public class ApplicationDbContext : DbContext
     {

@@ -145,7 +145,6 @@ namespace EventManagementApp
             listBoxParticipants.Name = "listBoxParticipants";
             listBoxParticipants.Size = new Size(391, 44);
             listBoxParticipants.TabIndex = 8;
-            listBoxParticipants.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // EventDetailsForm
             // 

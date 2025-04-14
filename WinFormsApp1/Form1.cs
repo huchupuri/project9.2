@@ -1,6 +1,7 @@
 ﻿
 
 using Microsoft.Extensions.Logging;
+using WinFormsApp1.classes;
 
 namespace EventManagementApp
 {
@@ -34,7 +35,6 @@ namespace EventManagementApp
                 txtTitle.PlaceholderText = "ЗАГОЛОВОК";
                 txtLocation.PlaceholderText = "МЕСТО";
                 txtDescription.PlaceholderText = "ОПИСАНИЕ";
-                dtpDate.Value = DateTime.Now;
             }
         }
         public void AddParti(string name, string surname)
@@ -53,9 +53,9 @@ namespace EventManagementApp
 
                 var newEvent = new Event
                 {
-                    title = txtTitle.Text,
+                    title = txtTitle.Text.Length == 0 ? "ЗАГЛОВОК" : txtTitle.Text,
                     date = date,
-                    place = txtLocation.Text,
+                    place = txtLocation.Text.Length == 0 ? "ЗАГЛОВОК" : txtTitle.Text,
                     description = txtDescription.Text,
                     participants = string.Join(", ", listBoxParticipants.Items.Cast<string>())
                 };
@@ -65,7 +65,7 @@ namespace EventManagementApp
             {
                 _mainForm.EventDelete(_event);
                 var NewEvent = new Event();
-                NewEvent.title = txtTitle.Text;
+                NewEvent.title = txtTitle.Text.Length == 0 ? "ЗАГJKJОК" : txtTitle.Text;
                 NewEvent.date = date;
                 NewEvent.place = txtLocation.Text;
                 NewEvent.description = txtDescription.Text;
@@ -94,12 +94,6 @@ namespace EventManagementApp
             var newUser = new NewUser(this);
             newUser.Show();
         }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnRemove_Click(object sender, EventArgs e)
         {
             if (listBoxParticipants.SelectedIndex != -1)

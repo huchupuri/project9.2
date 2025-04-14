@@ -122,6 +122,7 @@ namespace EventManagementApp
             btnReports.Text = "ОТЧЕТНОСТЬ";
             btnReports.TextAlign = ContentAlignment.MiddleLeft;
             btnReports.UseVisualStyleBackColor = false;
+            btnReports.Click += btnReports_Click;
             // 
             // btnAddEvent
             // 
@@ -232,7 +233,6 @@ namespace EventManagementApp
             RightToLeftLayout = true;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Event Management";
-            Load += MainForm_Load;
             splitContainer.Panel1.ResumeLayout(false);
             splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer).EndInit();
