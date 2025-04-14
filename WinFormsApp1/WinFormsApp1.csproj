@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="resours\tt.jpg" />
+    <Compile Remove="resours\**" />
+    <EmbeddedResource Remove="resours\**" />
+    <None Remove="resours\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,10 +43,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="resours\" />
   </ItemGroup>
 
 </Project>

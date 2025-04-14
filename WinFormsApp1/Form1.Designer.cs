@@ -118,7 +118,7 @@ namespace EventManagementApp
             btnRemove.ForeColor = SystemColors.ButtonFace;
             btnRemove.Location = new Point(417, 446);
             btnRemove.Name = "btnRemove";
-            btnRemove.Size = new Size(150, 44);
+            btnRemove.Size = new Size(174, 44);
             btnRemove.TabIndex = 6;
             btnRemove.Text = "УДАЛИТЬ УЧАСТНИКА";
             btnRemove.UseVisualStyleBackColor = false;
@@ -129,9 +129,9 @@ namespace EventManagementApp
             btnAdd.BackColor = Color.FromArgb(140, 102, 102);
             btnAdd.Font = new Font("Segoe UI", 7F);
             btnAdd.ForeColor = SystemColors.ButtonFace;
-            btnAdd.Location = new Point(586, 446);
+            btnAdd.Location = new Point(597, 446);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(189, 44);
+            btnAdd.Size = new Size(178, 44);
             btnAdd.TabIndex = 7;
             btnAdd.Text = "ДОБАВИТЬ УЧАСТНИКА";
             btnAdd.UseVisualStyleBackColor = false;
@@ -143,7 +143,7 @@ namespace EventManagementApp
             listBoxParticipants.FormattingEnabled = true;
             listBoxParticipants.Location = new Point(20, 446);
             listBoxParticipants.Name = "listBoxParticipants";
-            listBoxParticipants.Size = new Size(377, 44);
+            listBoxParticipants.Size = new Size(391, 44);
             listBoxParticipants.TabIndex = 8;
             listBoxParticipants.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 

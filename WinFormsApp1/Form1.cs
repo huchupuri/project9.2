@@ -34,6 +34,7 @@ namespace EventManagementApp
                 txtTitle.PlaceholderText = "ЗАГОЛОВОК";
                 txtLocation.PlaceholderText = "МЕСТО";
                 txtDescription.PlaceholderText = "ОПИСАНИЕ";
+                dtpDate.Value = DateTime.Now;
             }
         }
         public void AddParti(string name, string surname)
