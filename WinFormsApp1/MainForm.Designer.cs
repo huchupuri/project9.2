@@ -30,10 +30,10 @@ namespace EventManagementApp
             labelTitle = new Label();
             labelDate = new Label();
             labelPlace = new Label();
-            labelParticipants = new Label();
             labelDescription = new Label();
             btnEdit = new Button();
             btnDelete = new Button();
+            listBoxParticipants = new ListBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer).BeginInit();
             splitContainer.Panel1.SuspendLayout();
             splitContainer.Panel2.SuspendLayout();
@@ -56,10 +56,10 @@ namespace EventManagementApp
             // 
             splitContainer.Panel2.BackColor = Color.Linen;
             splitContainer.Panel2.BackgroundImage = (Image)resources.GetObject("splitContainer.Panel2.BackgroundImage");
+            splitContainer.Panel2.Controls.Add(listBoxParticipants);
             splitContainer.Panel2.Controls.Add(labelTitle);
             splitContainer.Panel2.Controls.Add(labelDate);
             splitContainer.Panel2.Controls.Add(labelPlace);
-            splitContainer.Panel2.Controls.Add(labelParticipants);
             splitContainer.Panel2.Controls.Add(labelDescription);
             splitContainer.Panel2.Controls.Add(btnEdit);
             splitContainer.Panel2.Controls.Add(btnDelete);
@@ -171,17 +171,6 @@ namespace EventManagementApp
             labelPlace.TabIndex = 13;
             labelPlace.Text = "МЕСТО";
             // 
-            // labelParticipants
-            // 
-            labelParticipants.BackColor = Color.FromArgb(194, 184, 163);
-            labelParticipants.Font = new Font("Segoe UI", 12F);
-            labelParticipants.ForeColor = Color.White;
-            labelParticipants.Location = new Point(10, 425);
-            labelParticipants.Name = "labelParticipants";
-            labelParticipants.Size = new Size(613, 39);
-            labelParticipants.TabIndex = 12;
-            labelParticipants.Text = "УЧАСТНИКИ";
-            // 
             // labelDescription
             // 
             labelDescription.BackColor = Color.FromArgb(194, 184, 163);
@@ -219,6 +208,18 @@ namespace EventManagementApp
             btnDelete.UseVisualStyleBackColor = false;
             btnDelete.Click += btnDelete_Click;
             // 
+            // listBoxParticipants
+            // 
+            listBoxParticipants.BackColor = Color.FromArgb(194, 184, 163);
+            listBoxParticipants.Font = new Font("Segoe UI", 12F);
+            listBoxParticipants.ForeColor = Color.White;
+            listBoxParticipants.FormattingEnabled = true;
+            listBoxParticipants.ItemHeight = 28;
+            listBoxParticipants.Location = new Point(10, 423);
+            listBoxParticipants.Name = "listBoxParticipants";
+            listBoxParticipants.Size = new Size(612, 32);
+            listBoxParticipants.TabIndex = 16;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
@@ -232,7 +233,7 @@ namespace EventManagementApp
             Name = "MainForm";
             RightToLeftLayout = true;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Event Management";
+            Text = "мишки в лесу";
             splitContainer.Panel1.ResumeLayout(false);
             splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer).EndInit();
@@ -252,9 +253,9 @@ namespace EventManagementApp
         private Button btnEdit;
         private Button buttonSort;
         private Label labelDescription;
-        private Label labelParticipants;
         private Label labelPlace;
         private Label labelTitle;
         private Label labelDate;
+        private ListBox listBoxParticipants;
     }
 }

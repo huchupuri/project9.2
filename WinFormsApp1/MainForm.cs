@@ -26,13 +26,12 @@ namespace EventManagementApp
         public MainForm()
         {
             InitializeComponent();
-            //this.BackgroundImageLayout = ImageLayout.Stretch;
             _context = new ApplicationDbContext();
             PopulateEventList();
             listBoxEvents.SelectedIndexChanged += listBoxEvents_SelectedIndexChanged;
             btnEdit.Enabled = false;//кнопка редактирование не работает
             btnDelete.Enabled = false;
-            //ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            listBoxParticipants.Enabled = false;
         }
         public void EventDelete(Event _event)
         {
@@ -63,15 +62,12 @@ namespace EventManagementApp
             {
                 labelPlace.Text = "МЕСТО";
                 labelDescription.Text = "ОПИСАНИЕ";
-                labelParticipants.Text = "УЧАСТНИКИ";
                 labelTitle.Text = "ЗАГОЛОВОК";
                 labelDate.Text = "ДАТА";
                 btnEdit.Enabled = false;
                 btnDelete.Enabled = false;
             }
         }
-
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
             EventDetailsForm newForm = new EventDetailsForm(this, listBoxEvents.SelectedItem as Event);
@@ -90,7 +86,10 @@ namespace EventManagementApp
                     labelDate.Text = selectedEvent.date.ToString("dd.MM.yyyy");
                     labelPlace.Text = selectedEvent.place;
                     labelDescription.Text = selectedEvent.description;
-                    labelParticipants.Text = string.Join(", ", selectedEvent.participants);
+                    foreach (var participant in selectedEvent.participants.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        listBoxParticipants.Items.Add(participant);
+                    }
                 }
                 btnEdit.Enabled = true;//кнопка редактирование работает если что тоо выбрано
                 btnDelete.Enabled = true;

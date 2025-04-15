@@ -72,11 +72,11 @@ namespace EventManagementApp
             dtpDate.Name = "dtpDate";
             dtpDate.Size = new Size(374, 34);
             dtpDate.TabIndex = 1;
-            dtpDate.Value = new DateTime(2025, 4, 3, 15, 55, 3, 83);
+            dtpDate.Value = new DateTime(2025, 4, 15, 13, 28, 35, 0);
             // 
             // txtLocation
             // 
-            txtLocation.BackColor = Color.FromArgb(140, 126, 117);
+            txtLocation.BackColor = Color.FromArgb(194, 184, 163);
             txtLocation.BorderStyle = BorderStyle.None;
             txtLocation.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtLocation.ForeColor = Color.White;
@@ -102,10 +102,11 @@ namespace EventManagementApp
             // 
             btnSave.BackColor = Color.FromArgb(140, 102, 102);
             btnSave.FlatStyle = FlatStyle.Flat;
+            btnSave.Font = new Font("Segoe UI", 12F);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(359, 522);
+            btnSave.Location = new Point(336, 522);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(110, 40);
+            btnSave.Size = new Size(126, 40);
             btnSave.TabIndex = 5;
             btnSave.Text = "сохранить";
             btnSave.UseVisualStyleBackColor = false;
@@ -114,11 +115,11 @@ namespace EventManagementApp
             // btnRemove
             // 
             btnRemove.BackColor = Color.FromArgb(140, 102, 102);
-            btnRemove.Font = new Font("Segoe UI", 7F);
+            btnRemove.Font = new Font("Segoe UI", 9F);
             btnRemove.ForeColor = SystemColors.ButtonFace;
-            btnRemove.Location = new Point(417, 446);
+            btnRemove.Location = new Point(426, 446);
             btnRemove.Name = "btnRemove";
-            btnRemove.Size = new Size(174, 44);
+            btnRemove.Size = new Size(174, 60);
             btnRemove.TabIndex = 6;
             btnRemove.Text = "УДАЛИТЬ УЧАСТНИКА";
             btnRemove.UseVisualStyleBackColor = false;
@@ -127,11 +128,11 @@ namespace EventManagementApp
             // btnAdd
             // 
             btnAdd.BackColor = Color.FromArgb(140, 102, 102);
-            btnAdd.Font = new Font("Segoe UI", 7F);
+            btnAdd.Font = new Font("Segoe UI", 9F);
             btnAdd.ForeColor = SystemColors.ButtonFace;
-            btnAdd.Location = new Point(597, 446);
+            btnAdd.Location = new Point(606, 446);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(178, 44);
+            btnAdd.Size = new Size(174, 60);
             btnAdd.TabIndex = 7;
             btnAdd.Text = "ДОБАВИТЬ УЧАСТНИКА";
             btnAdd.UseVisualStyleBackColor = false;
@@ -140,10 +141,13 @@ namespace EventManagementApp
             // listBoxParticipants
             // 
             listBoxParticipants.BackColor = Color.FromArgb(194, 184, 163);
+            listBoxParticipants.Font = new Font("Segoe UI", 12F);
+            listBoxParticipants.ForeColor = Color.White;
             listBoxParticipants.FormattingEnabled = true;
+            listBoxParticipants.ItemHeight = 28;
             listBoxParticipants.Location = new Point(20, 446);
             listBoxParticipants.Name = "listBoxParticipants";
-            listBoxParticipants.Size = new Size(391, 44);
+            listBoxParticipants.Size = new Size(400, 60);
             listBoxParticipants.TabIndex = 8;
             // 
             // EventDetailsForm

@@ -51,12 +51,15 @@
             // 
             // btnAddParticipant
             // 
+            btnAddParticipant.BackColor = Color.FromArgb(140, 126, 117);
+            btnAddParticipant.Font = new Font("Segoe UI", 8F);
+            btnAddParticipant.ForeColor = Color.White;
             btnAddParticipant.Location = new Point(123, 156);
             btnAddParticipant.Name = "btnAddParticipant";
             btnAddParticipant.Size = new Size(94, 29);
             btnAddParticipant.TabIndex = 2;
             btnAddParticipant.Text = "ДОБАВИТЬ";
-            btnAddParticipant.UseVisualStyleBackColor = true;
+            btnAddParticipant.UseVisualStyleBackColor = false;
             btnAddParticipant.Click += btnAddParticipant_Click;
             // 
             // NewUser

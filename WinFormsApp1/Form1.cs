@@ -35,6 +35,7 @@ namespace EventManagementApp
                 txtTitle.PlaceholderText = "ЗАГОЛОВОК";
                 txtLocation.PlaceholderText = "МЕСТО";
                 txtDescription.PlaceholderText = "ОПИСАНИЕ";
+                //здесь должна быть дата
             }
         }
         public void AddParti(string name, string surname)
@@ -53,11 +54,11 @@ namespace EventManagementApp
 
                 var newEvent = new Event
                 {
-                    title = txtTitle.Text.Length == 0 ? "ЗАГЛОВОК" : txtTitle.Text,
+                    title = txtTitle.Text.Length == 0 ? "ЗАГОЛОВОК" : txtTitle.Text,
                     date = date,
-                    place = txtLocation.Text.Length == 0 ? "ЗАГЛОВОК" : txtTitle.Text,
+                    place = txtLocation.Text.Length == 0 ? "МЕСТО" : txtTitle.Text,
                     description = txtDescription.Text,
-                    participants = string.Join(", ", listBoxParticipants.Items.Cast<string>())
+                    participants = string.Join(", ", listBoxParticipants.Items.Cast<string>()).Length == 0 ? "МЕСТО" : string.Join(", ", listBoxParticipants.Items.Cast<string>())
                 };
                 newFormContext.Events.Add(newEvent);
             }
