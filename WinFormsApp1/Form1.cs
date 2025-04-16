@@ -18,6 +18,8 @@ namespace EventManagementApp
             InitializeComponent();
             newFormContext = new ApplicationDbContext();
             _mainForm = mainForm;
+            Shown += _mainForm!.FormOpened!;
+            FormClosed += _mainForm.FormClosed!;
             _event = Event1;
             if (_event != null)
             {
@@ -56,9 +58,9 @@ namespace EventManagementApp
                 {
                     title = txtTitle.Text.Length == 0 ? "ЗАГОЛОВОК" : txtTitle.Text,
                     date = date,
-                    place = txtLocation.Text.Length == 0 ? "МЕСТО" : txtTitle.Text,
+                    place = txtLocation.Text.Length == 0 ? "МЕСТО" : txtLocation.Text,
                     description = txtDescription.Text,
-                    participants = string.Join(", ", listBoxParticipants.Items.Cast<string>()).Length == 0 ? "МЕСТО" : string.Join(", ", listBoxParticipants.Items.Cast<string>())
+                    participants = string.Join(", ", listBoxParticipants.Items.Cast<string>()).Length == 0 ? "УЧАСТНИКИ" : string.Join(", ", listBoxParticipants.Items.Cast<string>())
                 };
                 newFormContext.Events.Add(newEvent);
             }
@@ -66,7 +68,7 @@ namespace EventManagementApp
             {
                 _mainForm.EventDelete(_event);
                 var NewEvent = new Event();
-                NewEvent.title = txtTitle.Text.Length == 0 ? "ЗАГJKJОК" : txtTitle.Text;
+                NewEvent.title = txtTitle.Text.Length == 0 ? "ЗАГОЛОВОК" : txtTitle.Text;
                 NewEvent.date = date;
                 NewEvent.place = txtLocation.Text;
                 NewEvent.description = txtDescription.Text;

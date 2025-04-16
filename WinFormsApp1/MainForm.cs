@@ -42,6 +42,16 @@ namespace EventManagementApp
                 RefreshListBox();
             }
         }
+        public void FormOpened(object sender, EventArgs e)
+        {
+            btnEdit.Enabled = false;
+            btnAddEvent.Enabled = false;
+        }
+        public void FormClosed(object sender, EventArgs e)
+        {
+            btnEdit.Enabled = true;
+            btnAddEvent.Enabled = true;
+        }
 
         private void PopulateEventList()
         {
@@ -70,9 +80,17 @@ namespace EventManagementApp
         }
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            EventDetailsForm newForm = new EventDetailsForm(this, listBoxEvents.SelectedItem as Event);
+            if (listBoxEvents.SelectedIndex == -1)
+            {
+                listBoxEvents.SelectedIndex = 0;
+                listBoxEvents_SelectedIndexChanged(listBoxEvents, EventArgs.Empty);
+            }
+            else
+            {
+                EventDetailsForm newForm = new EventDetailsForm(this, listBoxEvents.SelectedItem as Event);
 
-            newForm.Show();
+                newForm.Show();
+            }
         }
 
         public void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,13 +104,15 @@ namespace EventManagementApp
                     labelDate.Text = selectedEvent.date.ToString("dd.MM.yyyy");
                     labelPlace.Text = selectedEvent.place;
                     labelDescription.Text = selectedEvent.description;
+                    listBoxParticipants.Items.Clear();
                     foreach (var participant in selectedEvent.participants.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries))
                     {
                         listBoxParticipants.Items.Add(participant);
                     }
                 }
-                btnEdit.Enabled = true;//кнопка редактирование работает если что тоо выбрано
+                btnEdit.Enabled = true;//кнопка редактирование работает если что то выбрано
                 btnDelete.Enabled = true;
+                listBoxParticipants.Enabled = true;
             }
             else
             {
