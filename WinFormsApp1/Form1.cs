@@ -46,40 +46,47 @@ namespace EventManagementApp
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            DateTime date = dtpDate.Value;
-            if (date.Kind == DateTimeKind.Unspecified)
+            try
             {
-                date = DateTime.SpecifyKind(date, DateTimeKind.Utc);
-            }
-            if (_event == null)
-            {
-
-                var newEvent = new Event
+                DateTime date = dtpDate.Value;
+                if (date.Kind == DateTimeKind.Unspecified)
                 {
-                    title = txtTitle.Text.Length == 0 ? "ЗАГОЛОВОК" : txtTitle.Text,
-                    date = date,
-                    place = txtLocation.Text.Length == 0 ? "МЕСТО" : txtLocation.Text,
-                    description = txtDescription.Text,
-                    participants = string.Join(", ", listBoxParticipants.Items.Cast<string>()).Length == 0 ? "УЧАСТНИКИ" : string.Join(", ", listBoxParticipants.Items.Cast<string>())
-                };
-                newFormContext.Events.Add(newEvent);
-            }
-            else
-            {
-                _mainForm.EventDelete(_event);
-                var NewEvent = new Event();
-                NewEvent.title = txtTitle.Text.Length == 0 ? "ЗАГОЛОВОК" : txtTitle.Text;
-                NewEvent.date = date;
-                NewEvent.place = txtLocation.Text;
-                NewEvent.description = txtDescription.Text;
-                NewEvent.participants = string.Join(", ", listBoxParticipants.Items.Cast<string>());
-                newFormContext.Events.Add(NewEvent);
-            }
+                    date = DateTime.SpecifyKind(date, DateTimeKind.Utc);
+                }
+                if (_event == null)
+                {
 
-            newFormContext.SaveChanges();
-            this.Close();
-            MessageBox.Show("Все успешно сохранено");
-            _mainForm.RefreshListBox();
+                    var newEvent = new Event
+                    {
+                        title = txtTitle.Text.Length == 0 ? "ЗАГОЛОВОК" : txtTitle.Text,
+                        date = date,
+                        place = txtLocation.Text.Length == 0 ? "МЕСТО" : txtLocation.Text,
+                        description = txtDescription.Text,
+                        participants = string.Join(", ", listBoxParticipants.Items.Cast<string>()).Length == 0 ? "УЧАСТНИКИ" : string.Join(", ", listBoxParticipants.Items.Cast<string>())
+                    };
+                    newFormContext.Events.Add(newEvent);
+                }
+                else
+                {
+                    _mainForm.EventDelete(_event);
+                    var NewEvent = new Event();
+                    NewEvent.title = txtTitle.Text.Length == 0 ? "ЗАГОЛОВОК" : txtTitle.Text;
+                    NewEvent.date = date;
+                    NewEvent.place = txtLocation.Text;
+                    NewEvent.description = txtDescription.Text;
+                    NewEvent.participants = string.Join(", ", listBoxParticipants.Items.Cast<string>());
+                    newFormContext.Events.Add(NewEvent);
+                }
+
+                newFormContext.SaveChanges();
+                this.Close();
+                MessageBox.Show("Все успешно сохранено");
+                _mainForm.RefreshListBox();
+            }
+            catch (EventValidationException ex)
+            {
+                MessageBox.Show($"Ошибка валидации: {ex.Message}");
+            }
         }
 
         private void txtTitle_KeyDown(object sender, KeyEventArgs e)

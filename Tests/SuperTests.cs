@@ -14,22 +14,22 @@ namespace TestProject9._2
         [TestMethod]
         public void Event_Title_ThrowsExceptionIfTitleFirstLetterIsSpacebar()
         {
-            Assert.ThrowsException<ArgumentException>(() => event1.title = " Пробежка по горам");
+            Assert.ThrowsException<EventValidationException>(() => event1.title = " Пробежка по горам");
         }
         [TestMethod]
         public void Event_Title_ThrowsExceptionIfTitleIsASingleSpacebar()
         {
-            Assert.ThrowsException<ArgumentException>(() => event1.title = " ");
+            Assert.ThrowsException<EventValidationException>(() => event1.title = " ");
         }
         [TestMethod]
         public void Event_Title_ThrowsExceptionIfTitleGoesToTheNewLine()
         {
-            Assert.ThrowsException<ArgumentException>(() => event1.title = $"Весёлые\nГонки");
+            Assert.ThrowsException<EventValidationException>(() => event1.title = $"Весёлые\nГонки");
         }
         [TestMethod]
         public void Event_Title_ThrowsExceptionIfTitleIsFiftyCharsLong()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => event1.title = new string('Р', 50));
+            Assert.ThrowsException<EventValidationException>(() => event1.title = new string('Р', 50));
         }
         [TestMethod]
         public void Event_Title()
@@ -41,17 +41,17 @@ namespace TestProject9._2
         [TestMethod]
         public void Event_Place_ThrowsExceptionIfPlaceIsFiftyCharsLong()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => event1.place = new string('Р', 50));
+            Assert.ThrowsException<EventValidationException>(() => event1.place = new string('Р', 50));
         }
         [TestMethod]
         public void Event_Place_ThrowsExceptionIfPlaceFirstLetterIsSpacebar()
         {
-            Assert.ThrowsException<ArgumentException>(() => event1.place = " Пробежка по горам");
+            Assert.ThrowsException<EventValidationException>(() => event1.place = " Пробежка по горам");
         }
         [TestMethod]
         public void Event_Place_ThrowsExceptionIfPlaceIsASingleSpacebar()
         {
-            Assert.ThrowsException<ArgumentException>(() => event1.title = " ");
+            Assert.ThrowsException<EventValidationException>(() => event1.title = " ");
         }
         [TestMethod]
         public void Event_Place()
@@ -62,17 +62,17 @@ namespace TestProject9._2
         [TestMethod]
         public void Event_Participants_ThrowsExceptionIfFirstLetterIsSpacebar()
         {
-            Assert.ThrowsException<ArgumentException>(() => event1.participants = " Пробежка по горам");
+            Assert.ThrowsException<EventValidationException>(() => event1.participants = " Пробежка по горам");
         }
         [TestMethod]
         public void Event_Place_ThrowsExceptionIfParticipantsIsASingleSpacebar()
         {
-            Assert.ThrowsException<ArgumentException>(() => event1.participants = " ");
+            Assert.ThrowsException<EventValidationException>(() => event1.participants = " ");
         }
         [TestMethod]
         public void Event_Participants_ThrowsExceptionIfContainsNums()
         {
-            Assert.ThrowsException<ArgumentException>(() => event1.participants = "124");
+            Assert.ThrowsException<EventValidationException>(() => event1.participants = "124");
         }
         [TestMethod]
         public void Event_Participants()
@@ -83,7 +83,7 @@ namespace TestProject9._2
         [TestMethod]
         public void Event_Discription_ThrowsExceptionIfDiscriptionIsFiveHundredCharsLong()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => event1.description = new string('Р', 500));
+            Assert.ThrowsException<EventValidationException>(() => event1.description = new string('Р', 500));
         }
         [TestMethod]
         public void Event_Discription()
