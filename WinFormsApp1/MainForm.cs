@@ -29,8 +29,6 @@ namespace EventManagementApp
             _context = new ApplicationDbContext();
             PopulateEventList();
             listBoxEvents.SelectedIndexChanged += listBoxEvents_SelectedIndexChanged;
-            btnEdit.Enabled = false;//кнопка редактирование не работает
-            btnDelete.Enabled = false;
             listBoxParticipants.Enabled = false;
         }
         public void EventDelete(Event _event)
