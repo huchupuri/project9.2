@@ -11,12 +11,12 @@ namespace WinFormsApp1.classes
     {
         public int id { get; set; }
         private string Title;
-        public DateTime date { get; set; }
+        private DateTime Date;
 
         private string Place;
 
         private string Description;
-        private string Participants { get; set; }
+        private string Participants;
 
         public string title
         {
@@ -100,6 +100,17 @@ namespace WinFormsApp1.classes
                     throw new EventValidationException("Участники не должны начинаться с пробела");
                 }
                 Participants = value;
+            }
+        }
+        public DateTime date
+        {
+            get
+            {
+                return Date;
+            }
+            set
+            {
+                Date = value;
             }
         }
     }
