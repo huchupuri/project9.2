@@ -171,11 +171,11 @@ namespace EventManagementApp
                 int rowIn = 2; //вторая строчка начало тк первая это шапочка
                 foreach (var item in listBoxEvents.Items)
                 {
-                    if (item is Event eventItem) 
+                    if (item is Event eventItem)
                     {
-                        tablica.Cells[rowIn, 1].Value = eventItem.title; 
-                        tablica.Cells[rowIn, 2].Value = eventItem.date.ToString("dd.MM.yyyy"); 
-                        tablica.Cells[rowIn, 3].Value = eventItem.place; 
+                        tablica.Cells[rowIn, 1].Value = eventItem.title;
+                        tablica.Cells[rowIn, 2].Value = eventItem.date.ToString("dd.MM.yyyy");
+                        tablica.Cells[rowIn, 3].Value = eventItem.place;
                         tablica.Cells[rowIn, 4].Value = eventItem.description;
                         tablica.Cells[rowIn, 5].Value = eventItem.participants;
 
@@ -193,6 +193,14 @@ namespace EventManagementApp
                     }
                 }
             }
+        }
+
+        private void textBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+            listBoxEvents.DataSource = _context.Events
+        .Where(conf => conf.title.ToLower()
+        .Contains(textBoxSearch.Text.ToLower()))
+        .ToList();
         }
     }
 }
