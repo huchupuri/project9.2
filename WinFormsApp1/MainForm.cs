@@ -1,16 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver.Core.Configuration;
-using OfficeOpenXml;
+﻿using OfficeOpenXml;
 using System.Data;
 using WinFormsApp1.classes;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Xamarin.Forms;
+using OfficeOpenXml;
 
 
 namespace EventManagementApp
 {
-    /// <summary>
-    /// класс событий 
-    /// </summary>
-
     /// <summary>
     /// класс главной формы
     /// </summary>
@@ -59,7 +56,6 @@ namespace EventManagementApp
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var selectedEvent = listBoxEvents.SelectedItem as Event;
-
             DialogResult result = MessageBox.Show(
             "Вы уверены, что хотите удалить это событие?",
             "Подтверждение удаления",
@@ -96,7 +92,7 @@ namespace EventManagementApp
             else
             {
                 EventDetailsForm newForm = new EventDetailsForm(this, listBoxEvents.SelectedItem as Event);
-
+                this.Hide();
                 newForm.Show();
             }
         }
@@ -140,6 +136,7 @@ namespace EventManagementApp
         private void btnAddEvent_Click_1(object sender, EventArgs e)
         {
             EventDetailsForm newForm = new EventDetailsForm(this, null);
+            this.Hide();
             newForm.Show();
         }
         private void PopulateEventList(bool sortByDate = false) //сортирует если передается тру , по умолчанию фалс добавляет событие без сортировки 
@@ -176,6 +173,10 @@ namespace EventManagementApp
                 for (int col = 0; col < headers.Length; col++) //делаем шапочку
                 {
                     tablica.Cells[1, col + 1].Value = headers[col];
+                    //tablica.Value = headers[col];
+                    //cell.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                    //cell.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
+                    //cell.Style.Font.Bold = true;
                 }
 
                 int rowIn = 2; //вторая строчка начало тк первая это шапочка
@@ -189,7 +190,7 @@ namespace EventManagementApp
                         tablica.Cells[rowIn, 4].Value = eventItem.description;
                         tablica.Cells[rowIn, 5].Value = eventItem.participants;
 
-                        rowIn++; // Переходим к следующей строке
+                        rowIn++; // переходим к следующей строке
                     }
                 }
                 tablica.Cells[tablica.Dimension.Address].AutoFitColumns();
@@ -207,10 +208,15 @@ namespace EventManagementApp
 
         private void textBoxSearch_TextChanged(object sender, EventArgs e)
         {
+            buttonSort.Enabled = string.IsNullOrWhiteSpace(textBoxSearch.Text);
+            btnReports.Enabled = string.IsNullOrWhiteSpace(textBoxSearch.Text);
             listBoxEvents.DataSource = _context.Events
         .Where(conf => conf.title.ToLower()
         .Contains(textBoxSearch.Text.ToLower()))
         .ToList();
+            bool isListBoxEmpty = listBoxEvents.Items.Count == 0;
+            btnEdit.Enabled = !isListBoxEmpty;
+            btnDelete.Enabled = !isListBoxEmpty;
         }
     }
 }

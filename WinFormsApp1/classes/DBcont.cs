@@ -9,6 +9,9 @@ namespace WinFormsApp1.classes
 {
     public class ApplicationDbContext : DbContext
     {
+        /// <summary>
+        /// класс с подключением к бд
+        /// </summary>
         public DbSet<Event> Events { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -12,6 +12,9 @@ namespace EventManagementApp
 {
     public partial class NewUser : Form
     {
+        /// <summary>
+        /// форма доабвления участника
+        /// </summary>
         EventDetailsForm EventDetails;
         public NewUser(EventDetailsForm EventDetails)
         {

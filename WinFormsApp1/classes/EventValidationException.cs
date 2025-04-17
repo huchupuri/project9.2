@@ -8,6 +8,10 @@ namespace WinFormsApp1.classes
 {
     public class EventValidationException : Exception
     {
+        /// <summary>
+        /// класс с исключением
+        /// </summary>
+        /// <param name="message"></param>
         public EventValidationException(string message) : base(message) { }
     }
 }
