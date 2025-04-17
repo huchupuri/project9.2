@@ -5,7 +5,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using WinFormsApp1.classes;
-using OfficeOpenXml;
 
 
 namespace EventManagementApp
@@ -71,7 +70,6 @@ namespace EventManagementApp
         private void btnEdit_Click(object sender, EventArgs e)
         {
             EventDetailsForm newForm = new EventDetailsForm(this, listBoxEvents.SelectedItem as Event);
-
             newForm.Show();
         }
 
@@ -86,9 +84,16 @@ namespace EventManagementApp
                     labelDate.Text = selectedEvent.date.ToString("dd.MM.yyyy");
                     labelPlace.Text = selectedEvent.place;
                     labelDescription.Text = selectedEvent.description;
-                    foreach (var participant in selectedEvent.participants.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries))
+                    if (listBoxParticipants.Items.Count == 0)
                     {
-                        listBoxParticipants.Items.Add(participant);
+                        foreach (var participant in selectedEvent.participants.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries))
+                        {
+                            listBoxParticipants.Items.Add(participant);
+                        }
+                    }
+                    else
+                    {
+                        listBoxParticipants.Items.Clear();
                     }
                 }
                 btnEdit.Enabled = true;//кнопка редактирование работает если что тоо выбрано
@@ -147,11 +152,11 @@ namespace EventManagementApp
                 int rowIn = 2; //вторая строчка начало тк первая это шапочка
                 foreach (var item in listBoxEvents.Items)
                 {
-                    if (item is Event eventItem) 
+                    if (item is Event eventItem)
                     {
-                        tablica.Cells[rowIn, 1].Value = eventItem.title; 
-                        tablica.Cells[rowIn, 2].Value = eventItem.date.ToString("dd.MM.yyyy"); 
-                        tablica.Cells[rowIn, 3].Value = eventItem.place; 
+                        tablica.Cells[rowIn, 1].Value = eventItem.title;
+                        tablica.Cells[rowIn, 2].Value = eventItem.date.ToString("dd.MM.yyyy");
+                        tablica.Cells[rowIn, 3].Value = eventItem.place;
                         tablica.Cells[rowIn, 4].Value = eventItem.description;
                         tablica.Cells[rowIn, 5].Value = eventItem.participants;
 
@@ -169,6 +174,13 @@ namespace EventManagementApp
                     }
                 }
             }
+        }
+        private void textBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+            listBoxEvents.DataSource = _context.Events
+        .Where(conf => conf.title.ToLower()
+        .Contains(textBoxSearch.Text.ToLower()))
+        .ToList();
         }
     }
 }

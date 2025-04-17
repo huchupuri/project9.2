@@ -27,18 +27,21 @@ namespace EventManagementApp
             listBoxEvents = new ListBox();
             btnReports = new Button();
             btnAddEvent = new Button();
+            listBoxParticipants = new ListBox();
             labelTitle = new Label();
             labelDate = new Label();
             labelPlace = new Label();
             labelDescription = new Label();
             btnEdit = new Button();
             btnDelete = new Button();
-            listBoxParticipants = new ListBox();
+            textBoxSearch = new TextBox();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer).BeginInit();
             splitContainer.Panel1.SuspendLayout();
             splitContainer.Panel2.SuspendLayout();
             splitContainer.SuspendLayout();
             panelLeftSide.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // splitContainer
@@ -70,6 +73,8 @@ namespace EventManagementApp
             // 
             // panelLeftSide
             // 
+            panelLeftSide.Controls.Add(pictureBox1);
+            panelLeftSide.Controls.Add(textBoxSearch);
             panelLeftSide.Controls.Add(buttonSort);
             panelLeftSide.Controls.Add(listBoxEvents);
             panelLeftSide.Controls.Add(btnReports);
@@ -104,9 +109,9 @@ namespace EventManagementApp
             listBoxEvents.ForeColor = Color.FromArgb(140, 126, 117);
             listBoxEvents.FormattingEnabled = true;
             listBoxEvents.ItemHeight = 28;
-            listBoxEvents.Location = new Point(10, 95);
+            listBoxEvents.Location = new Point(10, 123);
             listBoxEvents.Name = "listBoxEvents";
-            listBoxEvents.Size = new Size(330, 476);
+            listBoxEvents.Size = new Size(330, 448);
             listBoxEvents.TabIndex = 2;
             listBoxEvents.SelectedIndexChanged += listBoxEvents_SelectedIndexChanged;
             // 
@@ -137,6 +142,18 @@ namespace EventManagementApp
             btnAddEvent.TextAlign = ContentAlignment.MiddleLeft;
             btnAddEvent.UseVisualStyleBackColor = false;
             btnAddEvent.Click += btnAddEvent_Click_1;
+            // 
+            // listBoxParticipants
+            // 
+            listBoxParticipants.BackColor = Color.FromArgb(194, 184, 163);
+            listBoxParticipants.Font = new Font("Segoe UI", 12F);
+            listBoxParticipants.ForeColor = Color.White;
+            listBoxParticipants.FormattingEnabled = true;
+            listBoxParticipants.ItemHeight = 28;
+            listBoxParticipants.Location = new Point(10, 423);
+            listBoxParticipants.Name = "listBoxParticipants";
+            listBoxParticipants.Size = new Size(612, 32);
+            listBoxParticipants.TabIndex = 16;
             // 
             // labelTitle
             // 
@@ -208,17 +225,23 @@ namespace EventManagementApp
             btnDelete.UseVisualStyleBackColor = false;
             btnDelete.Click += btnDelete_Click;
             // 
-            // listBoxParticipants
+            // textBoxSearch
             // 
-            listBoxParticipants.BackColor = Color.FromArgb(194, 184, 163);
-            listBoxParticipants.Font = new Font("Segoe UI", 12F);
-            listBoxParticipants.ForeColor = Color.White;
-            listBoxParticipants.FormattingEnabled = true;
-            listBoxParticipants.ItemHeight = 28;
-            listBoxParticipants.Location = new Point(10, 423);
-            listBoxParticipants.Name = "listBoxParticipants";
-            listBoxParticipants.Size = new Size(612, 32);
-            listBoxParticipants.TabIndex = 16;
+            textBoxSearch.BackColor = Color.PapayaWhip;
+            textBoxSearch.Location = new Point(10, 91);
+            textBoxSearch.Name = "textBoxSearch";
+            textBoxSearch.Size = new Size(330, 27);
+            textBoxSearch.TabIndex = 4;
+            textBoxSearch.TextChanged += textBoxSearch_TextChanged;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = WinFormsApp1.Properties.Resources._1785649_thumb;
+            pictureBox1.Location = new Point(10, 91);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(27, 27);
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
@@ -239,6 +262,8 @@ namespace EventManagementApp
             ((System.ComponentModel.ISupportInitialize)splitContainer).EndInit();
             splitContainer.ResumeLayout(false);
             panelLeftSide.ResumeLayout(false);
+            panelLeftSide.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -257,5 +282,7 @@ namespace EventManagementApp
         private Label labelTitle;
         private Label labelDate;
         private ListBox listBoxParticipants;
+        private TextBox textBoxSearch;
+        private PictureBox pictureBox1;
     }
 }

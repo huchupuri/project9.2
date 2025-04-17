@@ -40,7 +40,14 @@ namespace EventManagementApp
         }
         public void AddParti(string name, string surname)
         {
-            listBoxParticipants.Items.Add($"{name} {surname}");
+            if (listBoxParticipants.Items.Count <= 10 && listBoxParticipants.Items.Count >=0)
+            {
+                listBoxParticipants.Items.Add($"{name} {surname}");
+            }
+            else
+            {
+                MessageBox.Show("нельзя добавлять больше 10 участников");
+            }
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -56,7 +63,7 @@ namespace EventManagementApp
                 {
                     title = txtTitle.Text.Length == 0 ? "ЗАГОЛОВОК" : txtTitle.Text,
                     date = date,
-                    place = txtLocation.Text.Length == 0 ? "МЕСТО" : txtTitle.Text,
+                    place = txtLocation.Text.Length == 0 ? "МЕСТО" : txtLocation.Text,
                     description = txtDescription.Text,
                     participants = string.Join(", ", listBoxParticipants.Items.Cast<string>()).Length == 0 ? "МЕСТО" : string.Join(", ", listBoxParticipants.Items.Cast<string>())
                 };
@@ -66,7 +73,7 @@ namespace EventManagementApp
             {
                 _mainForm.EventDelete(_event);
                 var NewEvent = new Event();
-                NewEvent.title = txtTitle.Text.Length == 0 ? "ЗАГJKJОК" : txtTitle.Text;
+                NewEvent.title = txtTitle.Text;
                 NewEvent.date = date;
                 NewEvent.place = txtLocation.Text;
                 NewEvent.description = txtDescription.Text;

@@ -21,7 +21,6 @@ namespace EventManagementApp
 
         private void btnAddParticipant_Click(object sender, EventArgs e)
         {
-
             EventDetails.AddParti(textBoxName.Text , textBoxSurname.Text);
             this.Close();
         }

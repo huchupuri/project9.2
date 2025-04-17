@@ -11,6 +11,11 @@ namespace WinFormsApp1.classes
     {
         public DbSet<Event> Events { get; set; }
 
+        public ApplicationDbContext()
+        {
+            Database.EnsureCreated();
+        }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = "Host=ep-silent-dawn-ab7uegdz-pooler.eu-west-2.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=npg_g6M8QBZaoCJU;SSL Mode=Require";
