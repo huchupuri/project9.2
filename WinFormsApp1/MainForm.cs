@@ -2,10 +2,7 @@
 using MongoDB.Driver.Core.Configuration;
 using OfficeOpenXml;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
 using WinFormsApp1.classes;
-using OfficeOpenXml;
 
 
 namespace EventManagementApp
