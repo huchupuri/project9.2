@@ -86,6 +86,7 @@ namespace EventManagementApp
             // textBoxSearch
             // 
             textBoxSearch.BackColor = Color.PapayaWhip;
+            textBoxSearch.ForeColor = Color.FromArgb(140, 126, 117);
             textBoxSearch.Location = new Point(10, 91);
             textBoxSearch.Name = "textBoxSearch";
             textBoxSearch.PlaceholderText = "Поиск";

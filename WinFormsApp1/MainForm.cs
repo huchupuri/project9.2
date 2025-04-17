@@ -62,6 +62,17 @@ namespace EventManagementApp
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var selectedEvent = listBoxEvents.SelectedItem as Event;
+
+            DialogResult result = MessageBox.Show(
+            "Вы уверены, что хотите удалить это событие?",
+            "Подтверждение удаления",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+
+            if (result == DialogResult.No)
+            {
+                return;
+            }
             EventDelete(selectedEvent);
             if (listBoxEvents.Items.Count > 0)
             {

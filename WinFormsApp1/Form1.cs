@@ -94,9 +94,14 @@ namespace EventManagementApp
         {
             if (e.KeyCode == Keys.Enter)
             {
+                string currentText = txtTitle.Text;
                 e.SuppressKeyPress = true;
                 e.Handled = true;
                 MessageBox.Show("Нельзя использовать перенос в заголовке");
+                txtTitle.Text = currentText;
+                txtTitle.SelectionStart = txtTitle.Text.Length;
+                txtTitle.SelectionLength = 0; 
+                txtTitle.Focus();
             }
         }
 
