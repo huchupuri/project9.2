@@ -4,6 +4,7 @@ using WinFormsApp1.classes;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Xamarin.Forms;
 using OfficeOpenXml;
+using System.Windows.Forms;
 
 
 namespace EventManagementApp
@@ -66,6 +67,7 @@ namespace EventManagementApp
             {
                 return;
             }
+            RefreshListBox();
             EventDelete(selectedEvent);
             if (listBoxEvents.Items.Count > 0)
             {
@@ -126,6 +128,7 @@ namespace EventManagementApp
         }
         public void RefreshListBox()
         {
+            listBoxEvents.DataSource = null;
             listBoxEvents.Items.Clear();
             var events = _context.Events.ToList();
             foreach (var eventItem in events)
@@ -141,6 +144,7 @@ namespace EventManagementApp
         }
         private void PopulateEventList(bool sortByDate = false) //сортирует если передается тру , по умолчанию фалс добавляет событие без сортировки 
         {
+            listBoxEvents.DataSource = null;
             var events = sortByDate
                 ? _context.Events.OrderBy(e => e.date).ToList()
                 : _context.Events.ToList();
