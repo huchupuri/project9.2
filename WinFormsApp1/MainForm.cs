@@ -22,7 +22,7 @@ namespace EventManagementApp
             InitializeComponent();
             _context = new ApplicationDbContext();
             PopulateEventList();
-            listBoxEvents.SelectedIndexChanged += listBoxEvents_SelectedIndexChanged;
+
             listBoxParticipants.Enabled = false;
         }
         /// <summary>
@@ -36,6 +36,7 @@ namespace EventManagementApp
                 _context.Events.Remove(_event);
                 _context.SaveChanges();
                 RefreshListBox();
+                textBoxSearch.Leave += textBoxSearch_Leave;
             }
         }
         /// <summary>
@@ -236,6 +237,19 @@ namespace EventManagementApp
             bool isListBoxEmpty = listBoxEvents.Items.Count == 0;
             btnEdit.Enabled = !isListBoxEmpty;
             btnDelete.Enabled = !isListBoxEmpty;
+        }
+
+        private void textBoxSearch_Leave(object sender, EventArgs e)
+        {
+            buttonSort.Enabled = true;
+            btnReports.Enabled = true;
+        }
+        private void textBoxSearch_Enter_1(object sender, EventArgs e)
+        {
+            buttonSort.Enabled = false;
+            btnReports.Enabled = false;
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
         }
     }
 }
