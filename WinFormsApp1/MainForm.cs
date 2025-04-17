@@ -11,10 +11,6 @@ using OfficeOpenXml;
 namespace EventManagementApp
 {
     /// <summary>
-    /// класс событий 
-    /// </summary>
-
-    /// <summary>
     /// класс главной формы
     /// </summary>
     public partial class MainForm : Form
@@ -60,7 +56,6 @@ namespace EventManagementApp
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var selectedEvent = listBoxEvents.SelectedItem as Event;
-
             DialogResult result = MessageBox.Show(
             "Вы уверены, что хотите удалить это событие?",
             "Подтверждение удаления",
@@ -208,6 +203,7 @@ namespace EventManagementApp
 
         private void textBoxSearch_TextChanged(object sender, EventArgs e)
         {
+            btnReports.Enabled = string.IsNullOrWhiteSpace(textBoxSearch.Text);
             listBoxEvents.DataSource = _context.Events
         .Where(conf => conf.title.ToLower()
         .Contains(textBoxSearch.Text.ToLower()))
