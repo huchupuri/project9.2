@@ -30,6 +30,8 @@ namespace EventManagementApp
             PopulateEventList();
             listBoxEvents.SelectedIndexChanged += listBoxEvents_SelectedIndexChanged;
             listBoxParticipants.Enabled = false;
+            btnEdit.Enabled = false;//кнопка редактирование не работает
+            btnDelete.Enabled = false;
         }
         public void EventDelete(Event _event)
         {
