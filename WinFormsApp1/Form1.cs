@@ -37,9 +37,13 @@ namespace EventManagementApp
                 txtTitle.PlaceholderText = "ЗАГОЛОВОК";
                 txtLocation.PlaceholderText = "МЕСТО";
                 txtDescription.PlaceholderText = "ОПИСАНИЕ";
-                //здесь должна быть дата
             }
         }
+        /// <summary>
+        /// добавление участника
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
         public void AddParti(string name, string surname)
         {
             listBoxParticipants.Items.Add($"{name} {surname}");

@@ -72,7 +72,7 @@ namespace EventManagementApp
             dtpDate.Name = "dtpDate";
             dtpDate.Size = new Size(374, 34);
             dtpDate.TabIndex = 1;
-            dtpDate.Value = new DateTime(2025, 4, 17, 0, 0, 0, 0);
+            dtpDate.Value = new DateTime(2025, 4, 19, 0, 0, 0, 0);
             // 
             // txtLocation
             // 

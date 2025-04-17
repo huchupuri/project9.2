@@ -93,6 +93,8 @@ namespace EventManagementApp
             textBoxSearch.Size = new Size(330, 27);
             textBoxSearch.TabIndex = 4;
             textBoxSearch.TextChanged += textBoxSearch_TextChanged;
+            textBoxSearch.Enter += textBoxSearch_Enter_1;
+            listBoxEvents.SelectedIndexChanged += listBoxEvents_SelectedIndexChanged;
             // 
             // buttonSort
             // 

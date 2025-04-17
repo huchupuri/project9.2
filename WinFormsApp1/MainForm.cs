@@ -23,11 +23,15 @@ namespace EventManagementApp
             InitializeComponent();
             _context = new ApplicationDbContext();
             PopulateEventList();
-            listBoxEvents.SelectedIndexChanged += listBoxEvents_SelectedIndexChanged;
+
             listBoxParticipants.Enabled = false;
             btnEdit.Enabled = false;//кнопка редактирование не работает
             btnDelete.Enabled = false;
         }
+        /// <summary>
+        /// удаление события
+        /// </summary>
+        /// <param name="_event"></param>
         public void EventDelete(Event _event)
         {
             if (_event != null)
@@ -35,13 +39,24 @@ namespace EventManagementApp
                 _context.Events.Remove(_event);
                 _context.SaveChanges();
                 RefreshListBox();
+                textBoxSearch.Leave += textBoxSearch_Leave;
             }
         }
+        /// <summary>
+        /// метод для блокирвоки кнопок
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void FormOpened(object sender, EventArgs e)
         {
             btnEdit.Enabled = false;
             btnAddEvent.Enabled = false;
         }
+        /// <summary>
+        /// метод для разблокировки кнопок
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void FormClosed(object sender, EventArgs e)
         {
             btnEdit.Enabled = true;
@@ -98,7 +113,11 @@ namespace EventManagementApp
                 newForm.Show();
             }
         }
-
+        /// <summary>
+        /// главный листбокс с событиями
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBoxEvents.SelectedIndex != -1)
@@ -126,6 +145,9 @@ namespace EventManagementApp
                 btnDelete.Enabled = false;
             }
         }
+        /// <summary>
+        /// обновление листобкса
+        /// </summary>
         public void RefreshListBox()
         {
             listBoxEvents.DataSource = null;
@@ -155,6 +177,9 @@ namespace EventManagementApp
                 listBoxEvents.Items.Add(eventItem);//добавялет как надо
             }
         }
+        /// <summary>
+        /// выбор события автоматический
+        /// </summary>
         public void SelectLastEvent()
         {
             if (listBoxEvents.Items.Count > 0)
@@ -177,10 +202,7 @@ namespace EventManagementApp
                 for (int col = 0; col < headers.Length; col++) //делаем шапочку
                 {
                     tablica.Cells[1, col + 1].Value = headers[col];
-                    //tablica.Value = headers[col];
-                    //cell.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                    //cell.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
-                    //cell.Style.Font.Bold = true;
+
                 }
 
                 int rowIn = 2; //вторая строчка начало тк первая это шапочка
@@ -221,6 +243,19 @@ namespace EventManagementApp
             bool isListBoxEmpty = listBoxEvents.Items.Count == 0;
             btnEdit.Enabled = !isListBoxEmpty;
             btnDelete.Enabled = !isListBoxEmpty;
+        }
+
+        private void textBoxSearch_Leave(object sender, EventArgs e)
+        {
+            buttonSort.Enabled = true;
+            btnReports.Enabled = true;
+        }
+        private void textBoxSearch_Enter_1(object sender, EventArgs e)
+        {
+            buttonSort.Enabled = false;
+            btnReports.Enabled = false;
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
         }
     }
 }
