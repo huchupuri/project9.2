@@ -94,7 +94,6 @@ namespace EventManagementApp
             textBoxSearch.TabIndex = 4;
             textBoxSearch.TextChanged += textBoxSearch_TextChanged;
             textBoxSearch.Enter += textBoxSearch_Enter_1;
-            listBoxEvents.SelectedIndexChanged += listBoxEvents_SelectedIndexChanged;
             // 
             // buttonSort
             // 
@@ -242,6 +241,7 @@ namespace EventManagementApp
             ClientSize = new Size(983, 586);
             Controls.Add(splitContainer);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MaximumSize = new Size(1001, 633);
             MinimumSize = new Size(1001, 633);
