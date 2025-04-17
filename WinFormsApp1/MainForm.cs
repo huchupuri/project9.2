@@ -144,7 +144,13 @@ namespace EventManagementApp
                 listBoxEvents.Items.Add(eventItem);//добавялет как надо
             }
         }
-
+        public void SelectLastEvent()
+        {
+            if (listBoxEvents.Items.Count > 0)
+            {
+                listBoxEvents.SelectedIndex = listBoxEvents.Items.Count - 1;
+            }
+        }
         private void buttonSort_Click(object sender, EventArgs e)
         {
             PopulateEventList(sortByDate: true);//сортирует

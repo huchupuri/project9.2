@@ -77,11 +77,12 @@ namespace EventManagementApp
                     NewEvent.participants = string.Join(", ", listBoxParticipants.Items.Cast<string>());
                     newFormContext.Events.Add(NewEvent);
                 }
-
+                
                 newFormContext.SaveChanges();
                 this.Close();
                 MessageBox.Show("Все успешно сохранено");
                 _mainForm.RefreshListBox();
+                _mainForm.SelectLastEvent();
             }
             catch (EventValidationException ex)
             {
