@@ -228,12 +228,27 @@ namespace EventManagementApp
 
         private void textBoxSearch_TextChanged(object sender, EventArgs e)
         {
+            string searchText = textBoxSearch.Text.ToLower();
+
             buttonSort.Enabled = string.IsNullOrWhiteSpace(textBoxSearch.Text);
             btnReports.Enabled = string.IsNullOrWhiteSpace(textBoxSearch.Text);
-            listBoxEvents.DataSource = _context.Events
-        .Where(conf => conf.title.ToLower()
-        .Contains(textBoxSearch.Text.ToLower()))
-        .ToList();
+
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                RefreshListBox();
+            }
+            else
+            {
+                var filteredEvents = _context.Events
+                    .Where(conf => conf.title.ToLower().Contains(searchText))
+                    .ToList();
+
+                listBoxEvents.Items.Clear();
+                foreach (var eventItem in filteredEvents)
+                {
+                    listBoxEvents.Items.Add(eventItem);
+                }
+            }
             bool isListBoxEmpty = listBoxEvents.Items.Count >= 0;
             btnEdit.Enabled = !isListBoxEmpty;
             btnDelete.Enabled = !isListBoxEmpty;
