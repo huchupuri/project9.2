@@ -234,7 +234,7 @@ namespace EventManagementApp
         .Where(conf => conf.title.ToLower()
         .Contains(textBoxSearch.Text.ToLower()))
         .ToList();
-            bool isListBoxEmpty = listBoxEvents.Items.Count == 0;
+            bool isListBoxEmpty = listBoxEvents.Items.Count >= 0;
             btnEdit.Enabled = !isListBoxEmpty;
             btnDelete.Enabled = !isListBoxEmpty;
         }
