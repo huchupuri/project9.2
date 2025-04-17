@@ -80,6 +80,7 @@ namespace EventManagementApp
                 
                 newFormContext.SaveChanges();
                 this.Close();
+                _mainForm.Show();
                 MessageBox.Show("Все успешно сохранено");
                 _mainForm.RefreshListBox();
                 _mainForm.SelectLastEvent();

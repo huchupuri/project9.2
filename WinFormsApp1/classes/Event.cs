@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp1.classes
 {
+    /// <summary>
+    /// класс с табличкой бд
+    /// </summary>
     public class Event
     {
         public int id { get; set; }
